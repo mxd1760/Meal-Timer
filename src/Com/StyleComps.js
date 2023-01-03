@@ -35,7 +35,7 @@ export const List = styled.FlatList.attrs({
   }
 })``;
 export const ListItem = styled.Text`
-  text-align:center;
+  text-align:left;
   background-color:${(props)=>props.theme.colors.ui.tertiary};
   font-size:${(props)=>props.theme.fontSizes.h4};
   margin-bottom:${(props)=>props.theme.space[2]};
@@ -92,6 +92,7 @@ export const ClosePopup = styled.Text`
 `
 export const TextEntry = styled.TextInput`
   width:80%;
+  flex-grow:1;
   border: ${(props)=>props.theme.colors.ui.secondary} ${(props)=>props.theme.borderSize[2]};
   font-size: ${(props)=>props.theme.fontSizes.h4};
   background-color: ${(props)=>props.theme.colors.ui.tertiary}
@@ -109,9 +110,10 @@ export const SmallButton = styled.Text`
   margin:${(props)=>props.theme.space[3]};
 `
 export const PopupText = styled.Text`
-padding:${(props)=>props.theme.space[1]}
+padding:${(props)=>props.theme.space[1]};
 color: ${(props)=>props.theme.colors.ui.primary};
 font-size: ${(props)=>props.theme.fontSizes.h5};
+text-align-vertical:center;
 `
 export const Caption = styled.Text`
   color: ${(props)=>props.theme.colors.ui.primary};
@@ -122,4 +124,16 @@ export const Caption = styled.Text`
 export const InfoView = styled.View`
   width:100%;
   padding-horizontal: ${(props)=>props.theme.space[2]};
+  padding-bottom: ${(props)=>props.theme.space[2]};
+`
+export const NumberEntry = styled.TextInput`
+  width:50%;
+  border: ${(props)=>props.theme.colors.ui.secondary} ${(props)=>props.theme.borderSize[2]};
+  font-size: ${(props)=>props.theme.fontSizes.h4};
+  background-color: ${(props)=>props.theme.colors.ui.tertiary}
+  padding: ${(props)=>props.theme.space[2]}
+`
+export const PopupSpan = styled.View`
+  flex-direction:row;
+  width:100%;
 `

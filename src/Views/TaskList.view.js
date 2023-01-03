@@ -1,16 +1,46 @@
 import {useState} from "react"
+import { Alert } from "react-native";
+import {v4 as uuid} from "uuid"
 import {SmallTitle,List,ListItem,Footer,Back,
   Popup,CenterPopup,PopupView,ClosePopup, 
-  NewItemButton,Caption, PopupTitle, PopupText,InfoView} from "../Com/StyleComps"
+  NewItemButton,Caption, PopupTitle, PopupText,
+  InfoView,PopupSpan,NumberEntry,TextEntry,SmallButton} from "../Com/StyleComps"
+import Channel from "../Enums/Channel.enum"
+import {formatTime,formatTitle} from "../Util/HelperFunctions"
 
-const formatTime = (time)=>{
-  return `${time} seconds`;
-}
 
-export default function({back,recipe={}}){
+export default function({back,recipe={},addTask=()=>{}}){
   let [selectedTask,setSelectedTask] = useState(0)
   let [showTaskInfoPopup,setShowTaskInfoPopup] = useState(false)
   let [showNewTaskPopup,setShowNewTaskPopup] = useState(false)
+
+  let [newTaskChannel,changeChannel] = useState(Channel.Default)
+  let [newTaskTime,changeNewTaskTime] = useState(0)
+  let [newTaskInstructions,changeInstructions] = useState("")
+
+  const newTaskButtonHandler = (e)=>{
+    if(newTaskTime&&newTaskInstructions){
+      addTask({
+        key:uuid(),
+        ordinalId:recipe.tasks.length+1,
+        channel:newTaskChannel,
+        instructions:newTaskInstructions,
+        time:newTaskTime,
+      })
+      changeChannel(Channel.Default);
+      changeNewTaskTime(0);
+      changeInstructions("");
+    }else{
+      Alert.alert("Empty task is invalid please provide values")
+    }
+    setShowNewTaskPopup(false)
+  }
+  const softSubmit=(e)=>{
+    if(newTaskTime&&newTaskInstructions){
+      newTaskButtonHandler(e)
+    }
+  }
+
   return(
     <>
       <SmallTitle>{recipe.title}</SmallTitle>
@@ -40,6 +70,25 @@ export default function({back,recipe={}}){
       }}>
         <CenterPopup>
           <PopupView>
+            <PopupTitle>Step: {recipe.tasks.length+1}</PopupTitle>
+            <InfoView>
+              <PopupText>Channel: </PopupText>
+              <PopupSpan>
+                <PopupText>Time:</PopupText>
+                <NumberEntry 
+                  onChangeText={changeNewTaskTime} 
+                  value={newTaskTime}
+                  keyboardType="numeric"
+                  onSubmitEditing={softSubmit}/> 
+                <PopupText>minutes</PopupText>
+              </PopupSpan>
+              <PopupText>Instructions:</PopupText>
+              <TextEntry
+                onChangeText={changeInstructions}
+                value={newTaskInstructions}
+                onSubmitEditing={softSubmit}/>
+            </InfoView>
+            <SmallButton onPress={newTaskButtonHandler}>Add</SmallButton>
             <ClosePopup onPress={()=>setShowNewTaskPopup(false)}>X</ClosePopup>
           </PopupView>
         </CenterPopup>

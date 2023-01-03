@@ -1,5 +1,6 @@
 export default class Channel {
   static Default = new Channel("default");
+  static Oven = new Channel("oven");
 
   constructor(name){
     this.name=name;

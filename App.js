@@ -202,6 +202,48 @@ const TemplateRecipes = [{
         time:100,
       }
     ]
+  },{
+    title:"Turkey Stock",
+    key:uuid(),
+    tasks:[
+      {
+        key:uuid(),
+        ordinalId:1,
+        instructions:"Preheat oven to 400 degrees F",
+        channel:Channel.Oven,
+        time:10, 
+      },{
+        key:uuid(),
+        ordinalId:2,
+        instructions: "Evenly Rub Turkey Pats with oil and sprinkle with salt and pepper.",
+        channel:Channel.Default,
+        time:2,
+      },{
+        key:uuid(),
+        ordinalId:3,
+        instructions: "Roast turkey skin side down in large roasting pan",
+        channel:Channel.Oven,
+        time:45,
+      },{
+        key:uuid(),
+        ordinalId:4,
+        instructions:"Prepare and combine vegitables",
+        channel:Channel.Default,
+        time:2,
+      },{
+        key:uuid(),
+        ordinalId:5,
+        instructions:"Remove Turkey from oven, reduce heat of oven to 350 degrees F, remove turkey from pan and mix vegitables with juices remaining in pan before reinserting turkey skin side up on vegitables.",
+        channel:Channel.Oven,
+        time:2,
+      },{
+        key:uuid(),
+        ordinalId:6,
+        instructions:"Place Turkey back in 350 deg F oven and continue to roast.",
+        channel:Channel.Oven,
+        time:35,
+      }
+    ]
   }
 ]
 
@@ -209,7 +251,7 @@ const TemplateRecipes = [{
 
 export default function App() {
   let [Recipes,changeRecipes] = useState(TemplateRecipes)
-  let [currentView,changeCurrentView] = useState(Views.RecipeTasks)
+  let [currentView,changeCurrentView] = useState(Views.Home)
   let [selectedRecipe,setSelectedRecipe] = useState(0)
   
   const addRecipe = (newRecipeTitle)=>{
@@ -219,6 +261,14 @@ export default function App() {
       tasks:[]
     }
     changeRecipes([...Recipes,newRecipe])
+  }
+  const addTask = (newTask)=>{
+    changeRecipes(Recipes.map((recipe,n)=>{
+      if(n==selectedRecipe){
+        recipe.tasks = [...recipe.tasks,newTask];
+      }
+      return recipe
+    }))
   }
 
   const toHome = (e)=>{
@@ -252,7 +302,8 @@ export default function App() {
     case Views.RecipeTasks:
       view = <RecipeTaskView 
         back={toRecipes}
-        recipe={Recipes[selectedRecipe]}/>
+        recipe={Recipes[selectedRecipe]}
+        addTask={addTask}/>
       break;
     case Views.MealOutput:
       view = <MealOutputView
