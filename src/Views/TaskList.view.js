@@ -101,6 +101,7 @@ export default function({back,recipe={},addTask=()=>{}}){
           Alert.alert("Task Info has been closed.");
           setShowTaskInfoPopup(false)
       }}>
+        {recipe.tasks.length?
         <CenterPopup>
           <PopupView>
             <PopupTitle>Step: {recipe.tasks[selectedTask].ordinalId}</PopupTitle>
@@ -115,6 +116,7 @@ export default function({back,recipe={},addTask=()=>{}}){
             <ClosePopup onPress={()=>setShowTaskInfoPopup(false)}>X</ClosePopup>
           </PopupView>
         </CenterPopup>
+        :null}
       </Popup>
     </>
   )
