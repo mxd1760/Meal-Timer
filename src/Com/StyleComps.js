@@ -1,4 +1,5 @@
-import { ShadowPropTypesIOS } from "react-native";
+import {List} from "react-native-paper"
+import SelectDropdown from "react-native-select-dropdown"
 import styled from "styled-components/native";
 
 export const Title = styled.Text`
@@ -29,7 +30,7 @@ export const Link = styled.Text`
 export const Content = styled.View`
   flex-grow:1;
 `
-export const List = styled.FlatList.attrs({
+export const MyList = styled.FlatList.attrs({
   contentContainerStyle:{
     padding: 16,
   }
@@ -137,3 +138,22 @@ export const PopupSpan = styled.View`
   flex-direction:row;
   width:100%;
 `
+export const CollapsedList = styled(List.Accordion)`
+  align-items:center;
+  background-color: ${(props)=>props.theme.colors.ui.quaternary};
+`
+export const CollapsedListItem = styled(List.Item)`
+  background-color: ${(props)=>props.theme.colors.ui.secondary};
+`
+export const Group = styled.View`
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:center;
+  margin:${(props)=>props.theme.sizes[0]}
+`
+export const SimpleText = styled.Text`
+  text-align-vertical:center;
+  color:${(props)=>props.theme.colors.ui.quaternary}
+  font-size:${(props)=>props.theme.fontSizes.h5};
+`
+export const Selector = styled(SelectDropdown)``

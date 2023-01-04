@@ -1,9 +1,22 @@
 import { useState } from "react";
 import { Alert } from "react-native";
-import {SmallTitle,Content,List,ListItem,
-  Footer,Back,NewItemButton,Popup,CenterPopup,
-  PopupView,PopupHeader,PopupTitle,ClosePopup,
-  TextEntry,SmallButton} from "../Com/StyleComps";
+import {
+  SmallTitle,
+  Content,
+  MyList,
+  ListItem,
+  Footer,
+  Back,
+  NewItemButton,
+  Popup,
+  CenterPopup,
+  PopupView,
+  PopupHeader,
+  PopupTitle,
+  ClosePopup,
+  TextEntry,
+  SmallButton,
+} from "../Com/StyleComps";
 import { formatTitle } from "../Util/HelperFunctions";
 
 export default function ({ back, recipes = [], addRecipe, goToRecipe }) {
@@ -21,7 +34,7 @@ export default function ({ back, recipes = [], addRecipe, goToRecipe }) {
     <>
       <SmallTitle>Recipe List</SmallTitle>
       <Content>
-        <List
+        <MyList
           data={recipes}
           renderItem={({ item, index }) => {
             return (

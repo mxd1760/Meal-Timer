@@ -1,6 +1,7 @@
 import {useState} from "react"
 import {StatusBar} from "react-native";
 import styled, { ThemeProvider } from "styled-components/native";
+import SafeAreaView, { SafeAreaProvider } from "react-native-safe-area-view";
 import {theme} from "./src/Inf/themes";
 import {v4 as uuid} from "uuid"
 import Views from "./src/Enums/Views.enum";
@@ -13,11 +14,11 @@ import MealOutputView from "./src/Views/MealOutput.view";
 
 
 
-
-const SafeArea = styled.SafeAreaView`
+const SafeAreaWrapper = styled(SafeAreaProvider)`
+`
+const SafeArea = styled(SafeAreaView)`
   flex: 1;
   margin-top: ${StatusBar.currentHeight}px;
-  margin-bottom: ${StatusBar.currentHeight}px;
   background-color: ${(props) => props.theme.colors.ui.primary};
   align-items: stretch;
 `;
@@ -92,25 +93,25 @@ const TemplateRecipes = [{
         instructions:"placeholder",
         channel:Channel.Default,
         time:100,
-      },      {
+      },{
         key:uuid(),
         ordinalId:2,
         instructions:"placeholder",
         channel:Channel.Default,
         time:100,
-      },      {
+      },{
         key:uuid(),
         ordinalId:3,
         instructions:"placeholder",
         channel:Channel.Default,
         time:100,
-      },      {
+      },{
         key:uuid(),
         ordinalId:4,
         instructions:"placeholder",
         channel:Channel.Default,
         time:100,
-      },      {
+      },{
         key:uuid(),
         ordinalId:5,
         instructions:"placeholder",
@@ -251,7 +252,7 @@ const TemplateRecipes = [{
 
 export default function App() {
   let [Recipes,changeRecipes] = useState(TemplateRecipes)
-  let [currentView,changeCurrentView] = useState(Views.Home)
+  let [currentView,changeCurrentView] = useState(Views.MealForm)
   let [selectedRecipe,setSelectedRecipe] = useState(0)
   
   const addRecipe = (newRecipeTitle)=>{
@@ -297,7 +298,8 @@ export default function App() {
       break;
     case Views.MealForm:
       view = <MealFormView
-        back={toHome}/>
+        back={toHome}
+        recipes={Recipes}/>
       break;
     case Views.RecipeTasks:
       view = <RecipeTaskView 
@@ -317,9 +319,11 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <SafeArea>
-        {view}
-      </SafeArea>
+      <SafeAreaProvider>
+        <SafeArea>
+          {view}
+        </SafeArea>
+      </SafeAreaProvider>
     </ThemeProvider>
   );
 }
