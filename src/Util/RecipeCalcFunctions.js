@@ -9,14 +9,22 @@ export function getTotalTime(recipe){
 }
 
 export function channelAvailable(stepChannel,occupiedChannels,channelSettings){
-  let channelSettingsCopy = {}
-  for(let channel in channelSettings){
-    channelSettingsCopy[channel] = channelSettings[channel];
+  console.log(stepChannel)
+  console.log("Occupied Channels: length->"+ occupiedChannels.length)
+  for(let elem of occupiedChannels){
+    console.log(elem)
+  }
+  console.log(channelSettings)
+  let usedChannelsTally = {}
+  for(let name in channelSettings){
+    usedChannelsTally[name] = 0;
   }
   for(let elem of occupiedChannels){
-    channelSettingsCopy[elem.channel] -= 1;
+    usedChannelsTally[elem.channel] += 1;
   }
-  let out = channelSettingsCopy[stepChannel] >= 1
+  console.log(usedChannelsTally)
+  let out = usedChannelsTally[stepChannel.name] < channelSettings[stepChannel.name]
+  console.log(out)
   return out;
 }
 
@@ -63,6 +71,7 @@ export function calculateRecipeStepOrder1(recipes){
 }
 
 export function calculateRecipeStepOrder(recipes,channelSettings){
+  console.log("calculating recipe")
   let out = [];
   let huristics = [];
   for(let i=0;i<recipes.length;i++){
@@ -81,10 +90,19 @@ export function calculateRecipeStepOrder(recipes,channelSettings){
         occupiedChannels.splice(i,1)
       }
     }
-    let minUpdateTime=Infinity;
     for(let h of huristics){
       if(h.lastStep!=-1){
-        if(channelAvailable(recipes[h.key].tasks[h.lastStep].channel,occupiedChannels,channelSettings)){
+        // let ca = 
+        // console.log(occupiedChannels)
+        // console.log(recipes[h.key].tasks[h.lastStep])
+        // console.log(ca)
+        let recipeAvailable = true
+        for(let elem of occupiedChannels){
+          if(elem.recipeKey == h.key){
+            recipeAvailable = false;
+          }
+        }
+        if(recipeAvailable && channelAvailable(recipes[h.key].tasks[h.lastStep].channel,occupiedChannels,channelSettings)){
           let timeTaken = recipes[h.key].tasks[h.lastStep].time
           let startTime = timeTally + timeTaken
           out.push({
@@ -94,33 +112,26 @@ export function calculateRecipeStepOrder(recipes,channelSettings){
             done:false,
           })
           occupiedChannels.push({
-            channel:recipes[h.key].tasks[h.lastStep].channel,
+            channel:recipes[h.key].tasks[h.lastStep].channel.name,
             freedTime:startTime,
+            recipeKey:h.key
           })
-          if(timeTaken<minUpdateTime){
-            minUpdateTime = timeTaken;
-          }
           h.remainingTime -= timeTaken;
           h.lastStep -= 1
         }
       }
     }
-    if(minUpdateTime != Infinity){
-      timeTally+=minUpdateTime
-    }else{
-      // wait for a channel to be fred
-      let minChannelFreedTime = Infinity
-      for(let elem of occupiedChannels){
-        if(elem.freedTime<minChannelFreedTime){
-          minChannelFreedTime = elem.freedTime;
-        }
+    let minChannelFreedTime = Infinity
+    for(let elem of occupiedChannels){
+      if(elem.freedTime<minChannelFreedTime){
+        minChannelFreedTime = elem.freedTime;
       }
-      if(minChannelFreedTime != Infinity){
-        timeTally = minChannelFreedTime;
-      }
-      else{
-        throw console.error("Time error");
-      }
+    }
+    if(minChannelFreedTime != Infinity){
+      timeTally = minChannelFreedTime;
+    }
+    else{
+      throw console.error("Time error");
     }
   }
   out.sort((a,b)=>b.startTime-a.startTime);
