@@ -12,7 +12,7 @@ import {
   PopupView,
   ClosePopup,
   NewItemButton,
-  Caption,
+  MyCaption,
   PopupTitle,
   PopupText,
   InfoView,
@@ -46,7 +46,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
       changeNewTaskTime(0);
       changeInstructions("");
     } else {
-      Alert.alert("Empty task is invalid please provide values");
+      Alert.alert("Empty step is invalid please provide values");
     }
     setShowNewTaskPopup(false);
   };
@@ -88,7 +88,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
         transparent={true}
         visible={showNewTaskPopup}
         onRequestClose={() => {
-          Alert.alert("New Task has been closed.");
+          Alert.alert("New Step has been closed.");
           setShowNewTaskPopup(false);
         }}
       >
@@ -144,7 +144,9 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
                   Time: {formatTime(recipe.tasks[selectedTask].time)}
                 </PopupText>
                 <PopupText>Instructions:</PopupText>
-                <Caption>-- {recipe.tasks[selectedTask].instructions}</Caption>
+                <MyCaption>
+                  -- {recipe.tasks[selectedTask].instructions}
+                </MyCaption>
               </InfoView>
               <ClosePopup onPress={() => setShowTaskInfoPopup(false)}>
                 X

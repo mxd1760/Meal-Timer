@@ -1,159 +1,193 @@
-import {List} from "react-native-paper"
-import SelectDropdown from "react-native-select-dropdown"
+import { List } from "react-native-paper";
+import SelectDropdown from "react-native-select-dropdown";
 import styled from "styled-components/native";
 
 export const Title = styled.Text`
   text-align: center;
-  padding: ${(props)=> props.theme.space[3]};
-  margin-top: ${(props)=> props.theme.space[4]}
-  color: ${(props)=> props.theme.colors.ui.quaternary};
-  font-size: ${(props)=>props.theme.fontSizes.h2};
-`
+  padding: ${(props) => props.theme.space[3]};
+  margin-top: ${(props) => props.theme.space[4]};
+  color: ${(props) => props.theme.colors.ui.quaternary};
+  font-size: ${(props) => props.theme.fontSizes.h2};
+`;
 export const SmallTitle = styled.Text`
-  padding:${(props)=>props.theme.space[3]}
-  color: ${(props)=>props.theme.colors.ui.quaternary};
-  font-size: ${(props)=>props.theme.fontSizes.h3};
-`
+  padding:${(props) => props.theme.space[3]};
+  color: ${(props) => props.theme.colors.ui.quaternary};
+  font-size: ${(props) => props.theme.fontSizes.h3};
+`;
 export const Links = styled.View`
   flex-grow: 1;
   flex-direction: column;
-  margin-top: ${(props)=>props.theme.space[3]};
-`
+  margin-top: ${(props) => props.theme.space[3]};
+`;
 export const Link = styled.Text`
   text-align: center
-  margin-horizontal: ${(props)=>props.theme.space[4]}
-  margin-vertical: ${(props)=>props.theme.space[3]}
-  background-color: ${(props)=>props.theme.colors.ui.tertiary};
-  color: ${(props)=>props.theme.colors.ui.primary};
-  font-size: ${(props)=>props.theme.fontSizes.h3}
-`
+  margin-horizontal: ${(props) => props.theme.space[4]}
+  margin-vertical: ${(props) => props.theme.space[3]}
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.h3}
+`;
 export const Content = styled.View`
-  flex-grow:1;
-`
+  flex-grow: 1;
+`;
 export const MyList = styled.FlatList.attrs({
-  contentContainerStyle:{
+  contentContainerStyle: {
     padding: 16,
-  }
-})``;
+  },
+})`
+  flex: 1;
+`;
 export const ListItem = styled.Text`
-  text-align:left;
-  background-color:${(props)=>props.theme.colors.ui.tertiary};
-  font-size:${(props)=>props.theme.fontSizes.h4};
-  margin-bottom:${(props)=>props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  font-size: ${(props) => props.theme.fontSizes.h4};
+  margin-bottom: ${(props) => props.theme.space[2]};
+`;
+export const ListItemView = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: ${(props)=> props.theme.colors.ui.tertiary};
+  margin-bottom: ${(props)=> props.theme.space[2]};
 `
 export const Footer = styled.View`
-  flex-direction:row;
-  margin:${(props)=>props.theme.space[3]}
-`
+  flex-direction: row;
+  margin: ${(props) => props.theme.space[3]};
+`;
 export const Back = styled.Text`
-  padding-vertical:${(props)=>props.theme.space[2]};
-  padding-horizontal:${(props)=>props.theme.space[4]};
-  background-color: ${(props)=>props.theme.colors.ui.tertiary};
-  font-size:${(props)=>props.theme.fontSizes.h4};
-`
+  padding-vertical: ${(props) => props.theme.space[2]};
+  padding-horizontal: ${(props) => props.theme.space[4]};
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  font-size: ${(props) => props.theme.fontSizes.h4};
+`;
 export const NewItemButton = styled.Text`
-  flex-grow:1;
-  text-align:center;
-  margin-left:${(props)=>props.theme.space[3]};
-  background-color:${(props)=>props.theme.colors.ui.tertiary};
-  font-size:${(props)=>props.theme.fontSizes.h4};
-  padding-vertical:${(props)=>props.theme.space[2]}
-`
-export const Popup = styled.Modal`
-`
+  flex-grow: 1;
+  text-align: center;
+  margin-left: ${(props) => props.theme.space[3]};
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  font-size: ${(props) => props.theme.fontSizes.h4};
+  padding-vertical: ${(props) => props.theme.space[2]};
+`;
+export const Popup = styled.Modal``;
 export const CenterPopup = styled.View`
-  flex:1;
-  justify-content:center;
-  align-items:center;
-  margin-bottom:${(props)=>props.theme.sizes[4]};
-`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: ${(props) => props.theme.sizes[4]};
+`;
 export const PopupView = styled.View`
-  align-items:center;
-  border-radius:${(props)=>props.theme.space[2]};
-  background-color:${(props)=>props.theme.colors.brand.secondary};
-  width: 90%;
-`
+  width: 90%; 
+  flex:1;
+  align-items: center;
+  border-radius: ${(props) => props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.brand.secondary};
+`;
 export const PopupTitle = styled.Text`
-  padding:${(props)=>props.theme.space[3]}
-  color: ${(props)=>props.theme.colors.ui.primary};
-  font-size: ${(props)=>props.theme.fontSizes.h3};
-`
+  padding:${(props) => props.theme.space[3]}
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.h3};
+`;
 export const ClosePopup = styled.Text`
   position:absolute;
   width:10%
   aspect-ratio:1;
   text-align:center;
   text-align-vertical:center;
-  top: ${(props)=>props.theme.space[0]};
-  right: ${(props)=>props.theme.space[0]};
-  font-size: ${(props)=>props.theme.fontSizes.h5};
-  background-color: ${(props)=>props.theme.colors.ui.quaternary};
-  border: ${(props)=>props.theme.colors.ui.secondary} ${(props)=>props.theme.borderSize[1]};
-  border-radius: ${(props)=>props.theme.space[2]};
-`
+  top: ${(props) => props.theme.space[0]};
+  right: ${(props) => props.theme.space[0]};
+  font-size: ${(props) => props.theme.fontSizes.h5};
+  background-color: ${(props) => props.theme.colors.ui.quaternary};
+  border: ${(props) => props.theme.colors.ui.secondary} ${(props) =>
+  props.theme.borderSize[1]};
+  border-radius: ${(props) => props.theme.space[2]};
+`;
 export const TextEntry = styled.TextInput`
   width:80%;
   flex-grow:1;
-  border: ${(props)=>props.theme.colors.ui.secondary} ${(props)=>props.theme.borderSize[2]};
-  font-size: ${(props)=>props.theme.fontSizes.h4};
-  background-color: ${(props)=>props.theme.colors.ui.tertiary}
-  padding: ${(props)=>props.theme.space[2]}
-`
+  border: ${(props) => props.theme.colors.ui.secondary} ${(props) =>
+  props.theme.borderSize[2]};
+  font-size: ${(props) => props.theme.fontSizes.h4};
+  background-color: ${(props) => props.theme.colors.ui.tertiary}
+  padding: ${(props) => props.theme.space[2]}
+`;
 export const SmallButton = styled.Text`
   width: 40%;
-  text-align:center;
-  border: ${(props)=>props.theme.colors.ui.secondary} ${(props)=>props.theme.borderSize[1]};
-  border-radius: ${(props)=>props.theme.space[2]};
-  background-color: ${(props)=>props.theme.colors.ui.tertiary};
-  color: ${(props)=>props.theme.colors.ui.primary};
-  font-size: ${(props)=>props.theme.fontSizes.h4};
-  padding: ${(props)=>props.theme.space[2]};
-  margin:${(props)=>props.theme.space[3]};
-`
+  text-align: center;
+  border: ${(props) => props.theme.colors.ui.secondary}
+    ${(props) => props.theme.borderSize[1]};
+  border-radius: ${(props) => props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.h4};
+  padding: ${(props) => props.theme.space[2]};
+  margin: ${(props) => props.theme.space[3]};
+`;
 export const PopupText = styled.Text`
-padding:${(props)=>props.theme.space[1]};
-color: ${(props)=>props.theme.colors.ui.primary};
-font-size: ${(props)=>props.theme.fontSizes.h5};
-text-align-vertical:center;
-`
-export const Caption = styled.Text`
-  color: ${(props)=>props.theme.colors.ui.primary};
-  font-size:${(props)=>props.theme.fontSizes.body};
-  padding-horizontal:${(props)=>props.theme.space[4]};
-  padding-bottom:${(props)=>props.theme.space[2]};
-`
+  padding: ${(props) => props.theme.space[1]};
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.h5};
+  text-align-vertical: center;
+`;
+export const MyCaption = styled.Text`
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.body};
+  padding-horizontal: ${(props) => props.theme.space[4]};
+  padding-bottom: ${(props) => props.theme.space[2]};
+`;
 export const InfoView = styled.View`
-  width:100%;
-  padding-horizontal: ${(props)=>props.theme.space[2]};
-  padding-bottom: ${(props)=>props.theme.space[2]};
-`
+  width: 100%;
+  padding-horizontal: ${(props) => props.theme.space[2]};
+  padding-bottom: ${(props) => props.theme.space[2]};
+`;
 export const NumberEntry = styled.TextInput`
   width:50%;
-  border: ${(props)=>props.theme.colors.ui.secondary} ${(props)=>props.theme.borderSize[2]};
-  font-size: ${(props)=>props.theme.fontSizes.h4};
-  background-color: ${(props)=>props.theme.colors.ui.tertiary}
-  padding: ${(props)=>props.theme.space[2]}
-`
+  border: ${(props) => props.theme.colors.ui.secondary} ${(props) =>
+  props.theme.borderSize[2]};
+  font-size: ${(props) => props.theme.fontSizes.h4};
+  background-color: ${(props) => props.theme.colors.ui.tertiary}
+  padding: ${(props) => props.theme.space[2]}
+`;
 export const PopupSpan = styled.View`
-  flex-direction:row;
-  width:100%;
-`
+  flex-direction: row;
+  width: 100%;
+`;
 export const CollapsedList = styled(List.Accordion)`
-  align-items:center;
-  background-color: ${(props)=>props.theme.colors.ui.quaternary};
-`
+  align-items: center;
+  background-color: ${(props) => props.theme.colors.ui.quaternary};
+`;
 export const CollapsedListItem = styled(List.Item)`
-  background-color: ${(props)=>props.theme.colors.ui.secondary};
-`
+  background-color: ${(props) => props.theme.colors.ui.secondary};
+`;
 export const Group = styled.View`
-  flex-direction:row;
-  justify-content:space-between;
-  align-items:center;
-  margin:${(props)=>props.theme.sizes[0]}
-`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: ${(props) => props.theme.sizes[0]};
+`;
 export const SimpleText = styled.Text`
   text-align-vertical:center;
-  color:${(props)=>props.theme.colors.ui.quaternary}
-  font-size:${(props)=>props.theme.fontSizes.h5};
+  color:${(props) => props.theme.colors.ui.quaternary}
+  font-size:${(props) => props.theme.fontSizes.h5};
+`;
+export const Selector = styled(SelectDropdown)``;
+export const RTIView = styled.View`
+  flex:1;
 `
-export const Selector = styled(SelectDropdown)``
+export const RTIView2 = styled.View`
+  justify-content: space-between;
+`
+export const RTIButton = styled.Text`
+  font-size: ${(props)=>props.theme.fontSizes.h4}
+  background-color: ${(props)=> props.theme.colors.brand.primary}
+  border-radius: ${(props)=>props.theme.sizes[1]};
+`
+export const RTIHeader = styled.Text`
+  text-align-vertical: center;
+  padding: ${(props) => props.theme.space[1]};
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.h5};
+`
+export const RTIImpact = styled.Text`
+  text-align-vertical: center;
+  padding: ${(props) => props.theme.space[1]};
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.title};
+`

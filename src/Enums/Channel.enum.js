@@ -1,6 +1,6 @@
 export default class Channel {
-  static Default = new Channel("default");
-  static Oven = new Channel("oven");
+  static Default = new Channel("Default");
+  static Oven = new Channel("Oven");
 
   constructor(name){
     this.name=name;
@@ -13,3 +13,12 @@ export default class Channel {
   }
   
 }
+
+let channelSettings = {}
+Object.keys(Channel).forEach(channel=>{
+  // console.log("channel: ")
+  // console.log(Channel[channel])
+  channelSettings[Channel[channel]] = 1;
+})
+
+export const defaultChannelSettings = channelSettings
