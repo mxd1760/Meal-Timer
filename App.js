@@ -13,9 +13,6 @@ import RecipeTaskView from "./src/Views/TaskList.view";
 import MealOutputView from "./src/Views/MealOutput.view";
 
 
-
-const SafeAreaWrapper = styled(SafeAreaProvider)`
-`
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
   margin-top: ${StatusBar.currentHeight}px;
@@ -29,59 +26,68 @@ const TemplateRecipes = [{
     key:uuid(),
     tasks:[
       {
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:1,
         instructions:"1",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:2,
         instructions:"2",
         channel:Channel.Prep,
-        time:200,
+        time:2,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:3,
         instructions:"3",
         channel:Channel.Prep,
-        time:300,
+        time:3,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:4,
         instructions:"4",
         channel:Channel.Prep,
-        time:400,
+        time:4,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:5,
         instructions:"5",
         channel:Channel.Prep,
-        time:500,
+        time:5,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:6,
         instructions:"6",
         channel:Channel.Prep,
-        time:600,
+        time:6,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:7,
         instructions:"7",
         channel:Channel.Prep,
-        time:700,
+        time:7,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:8,
         instructions:"8",
         channel:Channel.Prep,
-        time:800,
+        time:8,
       },{
+        recipeTitle:"Cookies",
         key:uuid(),
         ordinalId:9,
         instructions:"9",
         channel:Channel.Prep,
-        time:900,
+        time:9,
       }
     ]
   },{
@@ -89,35 +95,40 @@ const TemplateRecipes = [{
     key:uuid(),
     tasks:[
       {
+        recipeTitle:"Brownies",
         key:uuid(),
         ordinalId:1,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:10,
       },{
+        recipeTitle:"Brownies",
         key:uuid(),
         ordinalId:2,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:10,
       },{
+        recipeTitle:"Brownies",
         key:uuid(),
         ordinalId:3,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:10,
       },{
+        recipeTitle:"Brownies",
         key:uuid(),
         ordinalId:4,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:10,
       },{
+        recipeTitle:"Brownies",
         key:uuid(),
         ordinalId:5,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:10,
       },
     ]
   },{
@@ -125,83 +136,96 @@ const TemplateRecipes = [{
     key:uuid(),
     tasks:[
       {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:1,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:2,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:3,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:4,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:5,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:6,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:7,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:8,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:9,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:10,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:11,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:12,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       },      {
+        recipeTitle:"Cake",
         key:uuid(),
         ordinalId:13,
         instructions:"placeholder",
         channel:Channel.Prep,
-        time:100,
+        time:1,
       }
     ]
   },{
@@ -209,36 +233,42 @@ const TemplateRecipes = [{
     key:uuid(),
     tasks:[
       {
+        recipeTitle:"Turkey Stock",
         key:uuid(),
         ordinalId:1,
         instructions:"Preheat oven to 400 degrees F",
         channel:Channel.Oven,
         time:10, 
       },{
+        recipeTitle:"Turkey Stock",
         key:uuid(),
         ordinalId:2,
         instructions: "Evenly Rub Turkey Pats with oil and sprinkle with salt and pepper.",
         channel:Channel.Prep,
         time:2,
       },{
+        recipeTitle:"Turkey Stock",
         key:uuid(),
         ordinalId:3,
         instructions: "Roast turkey skin side down in large roasting pan",
         channel:Channel.Oven,
         time:45,
       },{
+        recipeTitle:"Turkey Stock",
         key:uuid(),
         ordinalId:4,
         instructions:"Prepare and combine vegitables",
         channel:Channel.Prep,
         time:2,
       },{
+        recipeTitle:"Turkey Stock",
         key:uuid(),
         ordinalId:5,
         instructions:"Remove Turkey from oven, reduce heat of oven to 350 degrees F, remove turkey from pan and mix vegitables with juices remaining in pan before reinserting turkey skin side up on vegitables.",
         channel:Channel.Oven,
         time:2,
       },{
+        recipeTitle:"Turkey Stock",
         key:uuid(),
         ordinalId:6,
         instructions:"Place Turkey back in 350 deg F oven and continue to roast.",
@@ -295,8 +325,11 @@ const TemplateRecipes = [{
 
 export default function App() {
   let [Recipes,changeRecipes] = useState(TemplateRecipes)
-  let [currentView,changeCurrentView] = useState(Views.MealForm)
+  let [currentView,changeCurrentView] = useState(Views.MealOutput)
   let [selectedRecipe,setSelectedRecipe] = useState(0)
+  let [mealTime,setMealTime] = useState(5)
+  let [mealPeriod, setMealPeriod] = useState(1)
+  let [mealRecipes, setMealRecipes] = useState(Recipes)
   
   const addRecipe = (newRecipeTitle)=>{
     const newRecipe = {
@@ -330,6 +363,14 @@ export default function App() {
     changeCurrentView(Views.RecipeTasks);
   }
 
+  const submitMealForm=(MealTime,MealPeriod,MealRecipes)=>{
+    changeCurrentView(Views.MealOutput);
+    setMealTime(MealTime)
+    setMealPeriod(MealPeriod)
+    setMealRecipes(MealRecipes)
+
+  }
+
   let view = null
   switch(currentView){
     case Views.Recipes:
@@ -342,7 +383,8 @@ export default function App() {
     case Views.MealForm:
       view = <MealFormView
         back={toHome}
-        recipes={Recipes}/>
+        recipes={Recipes}
+        submitMealForm={submitMealForm}/>
       break;
     case Views.RecipeTasks:
       view = <RecipeTaskView 
@@ -352,7 +394,10 @@ export default function App() {
       break;
     case Views.MealOutput:
       view = <MealOutputView
-        back={toMealForm}/>
+        back={toMealForm}
+        time={mealTime}
+        period={mealPeriod}
+        recipes={mealRecipes}/>
       break;
     default:
       view = <HomeView 

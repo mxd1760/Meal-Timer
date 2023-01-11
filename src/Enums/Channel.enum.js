@@ -14,3 +14,12 @@ export default class Channel {
   }
   
 }
+
+let channelSettings = {}
+Object.keys(Channel).forEach(channel=>{
+  // console.log("channel: ")
+  // console.log(Channel[channel])
+  channelSettings[Channel[channel].name] = 1;
+})
+
+export const defaultChannelSettings = channelSettings
