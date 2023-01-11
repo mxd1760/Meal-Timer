@@ -29,7 +29,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
   let [showTaskInfoPopup, setShowTaskInfoPopup] = useState(false);
   let [showNewTaskPopup, setShowNewTaskPopup] = useState(false);
 
-  let [newTaskChannel, changeChannel] = useState(Channel.Default);
+  let [newTaskChannel, changeChannel] = useState(Channel.Prep);
   let [newTaskTime, changeNewTaskTime] = useState(0);
   let [newTaskInstructions, changeInstructions] = useState("");
 
@@ -42,7 +42,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
         instructions: newTaskInstructions,
         time: newTaskTime,
       });
-      changeChannel(Channel.Default);
+      changeChannel(Channel.Prep);
       changeNewTaskTime(0);
       changeInstructions("");
     } else {

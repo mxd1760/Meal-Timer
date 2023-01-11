@@ -23,6 +23,7 @@ const SafeArea = styled(SafeAreaView)`
   align-items: stretch;
 `;
 
+
 const TemplateRecipes = [{
     title:"Cookies",
     key:uuid(),
@@ -31,55 +32,55 @@ const TemplateRecipes = [{
         key:uuid(),
         ordinalId:1,
         instructions:"1",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },{
         key:uuid(),
         ordinalId:2,
         instructions:"2",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:200,
       },{
         key:uuid(),
         ordinalId:3,
         instructions:"3",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:300,
       },{
         key:uuid(),
         ordinalId:4,
         instructions:"4",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:400,
       },{
         key:uuid(),
         ordinalId:5,
         instructions:"5",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:500,
       },{
         key:uuid(),
         ordinalId:6,
         instructions:"6",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:600,
       },{
         key:uuid(),
         ordinalId:7,
         instructions:"7",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:700,
       },{
         key:uuid(),
         ordinalId:8,
         instructions:"8",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:800,
       },{
         key:uuid(),
         ordinalId:9,
         instructions:"9",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:900,
       }
     ]
@@ -91,31 +92,31 @@ const TemplateRecipes = [{
         key:uuid(),
         ordinalId:1,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },{
         key:uuid(),
         ordinalId:2,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },{
         key:uuid(),
         ordinalId:3,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },{
         key:uuid(),
         ordinalId:4,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },{
         key:uuid(),
         ordinalId:5,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },
     ]
@@ -127,79 +128,79 @@ const TemplateRecipes = [{
         key:uuid(),
         ordinalId:1,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:2,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:3,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:4,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:5,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:6,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:7,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:8,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:9,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:10,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:11,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:12,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       },      {
         key:uuid(),
         ordinalId:13,
         instructions:"placeholder",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:100,
       }
     ]
@@ -217,7 +218,7 @@ const TemplateRecipes = [{
         key:uuid(),
         ordinalId:2,
         instructions: "Evenly Rub Turkey Pats with oil and sprinkle with salt and pepper.",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:2,
       },{
         key:uuid(),
@@ -229,7 +230,7 @@ const TemplateRecipes = [{
         key:uuid(),
         ordinalId:4,
         instructions:"Prepare and combine vegitables",
-        channel:Channel.Default,
+        channel:Channel.Prep,
         time:2,
       },{
         key:uuid(),
@@ -243,6 +244,48 @@ const TemplateRecipes = [{
         instructions:"Place Turkey back in 350 deg F oven and continue to roast.",
         channel:Channel.Oven,
         time:35,
+      }
+    ]
+  },{
+    title: "Tacos",
+    key:uuid(),
+    tasks:[
+      {
+        key:uuid(),
+        ordinalId:1,
+        instructions:"brown the meat",
+        channel:Channel.Prep,
+        time:10,
+      },{
+        key:uuid(),
+        ordinaId:2,
+        instructions:"chop lettuce",
+        channel:Channel.Prep,
+        time:2,
+      },{
+        key:uuid(),
+        ordinaId:3,
+        instructions:"chop tomatos",
+        channel:Channel.Prep,
+        time:2,
+      },{
+        key:uuid(),
+        ordinaId:4,
+        instructions:"chop onion",
+        channel:Channel.Prep,
+        time:2,
+      },{
+        key:uuid(),
+        ordinaId:5,
+        instructions:"prepare shreded cheese",
+        channel:Channel.Prep,
+        time:2,
+      },{
+        key:uuid(),
+        ordinaId:6,
+        instructions:"warm tortillas/shells",
+        channel:Channel.Prep,
+        time:5,
       }
     ]
   }
