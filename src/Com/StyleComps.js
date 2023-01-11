@@ -155,7 +155,8 @@ export const NumberEntry = styled.TextInput`
   props.theme.borderSize[2]};
   font-size: ${(props) => props.theme.fontSizes.h5};
   background-color: ${(props) => props.theme.colors.ui.tertiary}
-  padding: ${(props) => props.theme.space[2]}
+  padding: ${(props) => props.theme.space[1]}
+  margin-top:${props=>props.theme.space[1]}
 `;
 export const PopupSpan = styled.View`
   flex-direction: row;
@@ -219,3 +220,15 @@ export const RLWrapper = styled.View`
   align-items:center;
 `
 export const RLPressable = styled.TouchableWithoutFeedback``;
+export const MiniPopupView = styled.View`
+  width: 90%;
+  align-items: center;
+  border-radius: ${(props) => props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.brand.secondary};
+`;
+export const SmallPopupTitle = styled.Text`
+  text-align:center;
+  padding:${(props) => props.theme.space[3]}
+  color: ${(props) => props.theme.colors.ui.primary};
+  font-size: ${(props) => props.theme.fontSizes.h4};
+`;
