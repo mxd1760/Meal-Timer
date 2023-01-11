@@ -26,8 +26,8 @@ import {
 } from "../Com/StyleComps";
 import Channel  from "../Enums/Channel.enum";
 import { formatTime } from "../Util/HelperFunctions";
-import {colors} from "../Inf/themes/colors"
-const errorColor = colors.ui.error
+import { theme } from "../Inf/themes";
+
 
 export default function ({ back, recipe = {}, addTask = () => {} }) {
   let [selectedTask, setSelectedTask] = useState(0);
@@ -144,7 +144,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
               <PopupSpan>
                 <PopupText>Time:</PopupText>
                 <NumberEntry
-                  style={timeIsValid||{backgroundColor:errorColor}}
+                  style={timeIsValid||{backgroundColor:theme.colors.ui.error}}
                   onChangeText={timeInputHandler}
                   value={newTaskTime}
                   keyboardType="numeric"
@@ -154,7 +154,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
               </PopupSpan>
               <PopupText>Instructions:</PopupText>
               <TextAreaEntry
-                style={instructionsAreValid||{backgroundColor:errorColor}}
+                style={instructionsAreValid||{backgroundColor:theme.colors.ui.error}}
                 onChangeText={instructionsInputHandler}
                 value={newTaskInstructions}
                 onSubmitEditing={softSubmit}
