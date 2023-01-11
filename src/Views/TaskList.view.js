@@ -22,13 +22,8 @@ import {
   SmallButton,
   Selector,
 } from "../Com/StyleComps";
-import Channel, { defaultChannelSettings } from "../Enums/Channel.enum";
-import { formatTime, formatTitle } from "../Util/HelperFunctions";
-
-// const defaultChannelKeys = []
-// for (let i in defaultChannelSettings){
-//   defaultChannelKeys.push(i)
-// }
+import Channel  from "../Enums/Channel.enum";
+import { formatTime } from "../Util/HelperFunctions";
 
 
 export default function ({ back, recipe = {}, addTask = () => {} }) {

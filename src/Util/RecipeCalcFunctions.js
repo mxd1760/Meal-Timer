@@ -1,4 +1,5 @@
 import {v4 as uuid} from "uuid"
+import {times,periods} from "./Times"
 
 export function getTotalTime(recipe){
   let totalTime= 0;
@@ -9,12 +10,12 @@ export function getTotalTime(recipe){
 }
 
 export function channelAvailable(stepChannel,occupiedChannels,channelSettings){
-  console.log(stepChannel)
-  console.log("Occupied Channels: length->"+ occupiedChannels.length)
-  for(let elem of occupiedChannels){
-    console.log(elem)
-  }
-  console.log(channelSettings)
+  // console.log(stepChannel)
+  // console.log("Occupied Channels: length->"+ occupiedChannels.length)
+  // for(let elem of occupiedChannels){
+  //   console.log(elem)
+  // }
+  // console.log(channelSettings)
   let usedChannelsTally = {}
   for(let name in channelSettings){
     usedChannelsTally[name] = 0;
@@ -22,10 +23,30 @@ export function channelAvailable(stepChannel,occupiedChannels,channelSettings){
   for(let elem of occupiedChannels){
     usedChannelsTally[elem.channel] += 1;
   }
-  console.log(usedChannelsTally)
+  // console.log(usedChannelsTally)
   let out = usedChannelsTally[stepChannel.name] < channelSettings[stepChannel.name]
-  console.log(out)
+  // console.log(out)
   return out;
+}
+
+export function formatTime(t_minus,time,period){
+  while(t_minus>=60){
+    t_minus -= 60;
+    time -= 1;
+    if(time<0){
+      time=11;
+      period= period==0?1:0;
+    }
+  }
+  if(t_minus ==0){
+    return `${times[time]}:00 ${periods[period]}`;
+  }else{
+    time -= 1;
+    if(time<0){
+      time=11;
+    }
+    return `${times[time]}:${60-t_minus} ${periods[period]}`
+  }
 }
 
 /* obj template

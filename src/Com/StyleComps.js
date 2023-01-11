@@ -10,7 +10,7 @@ export const Title = styled.Text`
   font-size: ${(props) => props.theme.fontSizes.h2};
 `;
 export const SmallTitle = styled.Text`
-  padding:${(props) => props.theme.space[3]};
+  padding: ${(props) => props.theme.space[3]};
   color: ${(props) => props.theme.colors.ui.quaternary};
   font-size: ${(props) => props.theme.fontSizes.h3};
 `;
@@ -45,9 +45,9 @@ export const ListItem = styled.Text`
 export const ListItemView = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${(props)=> props.theme.colors.ui.tertiary};
-  margin-bottom: ${(props)=> props.theme.space[2]};
-`
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  margin-bottom: ${(props) => props.theme.space[2]};
+`;
 export const Footer = styled.View`
   flex-direction: row;
   margin: ${(props) => props.theme.space[3]};
@@ -73,12 +73,12 @@ export const CenterPopup = styled.View`
   align-items: center;
 `;
 export const PopupView = styled.View`
-  width: 90%; 
-  flex:1;
+  width: 90%;
+  flex: 1;
   align-items: center;
   border-radius: ${(props) => props.theme.space[2]};
   background-color: ${(props) => props.theme.colors.brand.secondary};
-  margin: ${props=>props.theme.sizes[2]};
+  margin: ${(props) => props.theme.sizes[2]};
 `;
 export const PopupTitle = styled.Text`
   padding:${(props) => props.theme.space[3]}
@@ -109,14 +109,15 @@ export const TextEntry = styled.TextInput`
   padding: ${(props) => props.theme.space[2]}
 `;
 export const TextAreaEntry = styled.TextInput`
-  flex:1;
-  text-align-vertical:top;
-  padding: ${props=>props.theme.sizes[0]};
-  margin: ${props=>props.theme.sizes[1]};
-  margin-top: ${props=>props.theme.sizes[0]};
-  font-size: ${props=>props.theme.fontSizes.title};
-  background-color:${props=>props.theme.colors.ui.tertiary};
-  border: ${(props) => props.theme.colors.ui.secondary} ${(props) => props.theme.borderSize[2]};
+  flex: 1;
+  text-align-vertical: top;
+  padding: ${(props) => props.theme.sizes[0]};
+  margin: ${(props) => props.theme.sizes[1]};
+  margin-top: ${(props) => props.theme.sizes[0]};
+  font-size: ${(props) => props.theme.fontSizes.title};
+  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  border: ${(props) => props.theme.colors.ui.secondary}
+    ${(props) => props.theme.borderSize[2]};
 `;
 export const SmallButton = styled.Text`
   width: 40%;
@@ -143,7 +144,7 @@ export const MyCaption = styled.Text`
   padding-bottom: ${(props) => props.theme.space[2]};
 `;
 export const InfoView = styled.View`
-  flex:1;
+  flex: 1;
   width: 100%;
   padding-horizontal: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
@@ -180,26 +181,26 @@ export const SimpleText = styled.Text`
 `;
 export const Selector = styled(SelectDropdown)``;
 export const RTIView = styled.View`
-  flex:1;
-`
+  flex: 1;
+`;
 export const RTIView2 = styled.View`
   justify-content: space-between;
-`
+`;
 export const RTIButton = styled.Text`
-  font-size: ${(props)=>props.theme.fontSizes.h4}
-  background-color: ${(props)=> props.theme.colors.brand.primary}
-  border-radius: ${(props)=>props.theme.sizes[1]};
-`
+  font-size: ${(props) => props.theme.fontSizes.h4}
+  background-color: ${(props) => props.theme.colors.brand.primary}
+  border-radius: ${(props) => props.theme.sizes[1]};
+`;
 export const RTIHeader = styled.Text`
   text-align-vertical: center;
   padding: ${(props) => props.theme.space[1]};
   color: ${(props) => props.theme.colors.ui.primary};
   font-size: ${(props) => props.theme.fontSizes.h5};
-`
-export const RTIImpact = styled.Text`
+`;
+export const RTITimeStamp = styled.Text`
+  text-align:right;
   text-align-vertical: center;
   padding: ${(props) => props.theme.space[1]};
   color: ${(props) => props.theme.colors.ui.primary};
   font-size: ${(props) => props.theme.fontSizes.title};
-`
-
+`;

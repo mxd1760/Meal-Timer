@@ -24,7 +24,7 @@ import { times, periods } from "../Util/Times";
 export default function ({ back, recipes, submitMealForm }) {
   const [showSelectRecipePopup, setShowSelectRecipePopup] = useState(false);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
-  const [selectedTimePeriod, setSelectedTimePeriod] = useState(0);
+  const [selectedTimePeriod, setSelectedTimePeriod] = useState(1);
   const [selectedTime, setSelectedTime] = useState(0);
 
   const addSelectedRecipe = (idx) => {
