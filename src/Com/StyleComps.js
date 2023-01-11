@@ -111,7 +111,9 @@ export const TextEntry = styled.TextInput`
 export const TextAreaEntry = styled.TextInput`
   flex:1;
   text-align-vertical:top;
+  padding: ${props=>props.theme.sizes[0]};
   margin: ${props=>props.theme.sizes[1]};
+  margin-top: ${props=>props.theme.sizes[0]};
   font-size: ${props=>props.theme.fontSizes.title};
   background-color:${props=>props.theme.colors.ui.tertiary};
   border: ${(props) => props.theme.colors.ui.secondary} ${(props) => props.theme.borderSize[2]};

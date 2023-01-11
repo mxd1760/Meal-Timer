@@ -25,14 +25,20 @@ import {
 import Channel, { defaultChannelSettings } from "../Enums/Channel.enum";
 import { formatTime, formatTitle } from "../Util/HelperFunctions";
 
+// const defaultChannelKeys = []
+// for (let i in defaultChannelSettings){
+//   defaultChannelKeys.push(i)
+// }
+
+
 export default function ({ back, recipe = {}, addTask = () => {} }) {
   let [selectedTask, setSelectedTask] = useState(0);
   let [showTaskInfoPopup, setShowTaskInfoPopup] = useState(false);
   let [showNewTaskPopup, setShowNewTaskPopup] = useState(false);
-
   let [newTaskChannel, changeChannel] = useState(Channel.Prep);
   let [newTaskTime, changeNewTaskTime] = useState(0);
   let [newTaskInstructions, changeInstructions] = useState("");
+
 
   const newTaskButtonHandler = (e) => {
     if (newTaskTime && newTaskInstructions) {
@@ -97,10 +103,19 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
           <PopupView>
             <PopupTitle>Step: {recipe.tasks.length + 1}</PopupTitle>
             <InfoView>
+              <PopupSpan>
               <PopupText>Channel: </PopupText>
-              <Selector
-                data={defaultChannelSettings}
-                defaultValueByIndex={0}/>
+                <Selector
+                  data={Object.keys(Channel)}
+                  defaultValueByIndex={0}
+                  onSelect={(item)=>{changeChannel(Channel[item])}}
+                  buttonTextAfterSelection={(item) => {
+                    return item;
+                  }}
+                  rowTextForSelection={(item) => {
+                    return item;
+                  }}/>
+              </PopupSpan>
               <PopupSpan>
                 <PopupText>Time:</PopupText>
                 <NumberEntry
