@@ -18,10 +18,11 @@ import {
   InfoView,
   PopupSpan,
   NumberEntry,
-  TextEntry,
+  TextAreaEntry,
   SmallButton,
+  Selector,
 } from "../Com/StyleComps";
-import Channel from "../Enums/Channel.enum";
+import Channel, { defaultChannelSettings } from "../Enums/Channel.enum";
 import { formatTime, formatTitle } from "../Util/HelperFunctions";
 
 export default function ({ back, recipe = {}, addTask = () => {} }) {
@@ -97,6 +98,9 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
             <PopupTitle>Step: {recipe.tasks.length + 1}</PopupTitle>
             <InfoView>
               <PopupText>Channel: </PopupText>
+              <Selector
+                data={defaultChannelSettings}
+                defaultValueByIndex={0}/>
               <PopupSpan>
                 <PopupText>Time:</PopupText>
                 <NumberEntry
@@ -108,10 +112,11 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
                 <PopupText>minutes</PopupText>
               </PopupSpan>
               <PopupText>Instructions:</PopupText>
-              <TextEntry
+              <TextAreaEntry
                 onChangeText={changeInstructions}
                 value={newTaskInstructions}
                 onSubmitEditing={softSubmit}
+                multiline
               />
             </InfoView>
             <SmallButton onPress={newTaskButtonHandler}>Add</SmallButton>

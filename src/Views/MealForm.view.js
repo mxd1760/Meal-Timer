@@ -130,7 +130,7 @@ export default function ({ back, recipes, submitMealForm }) {
               )}
               keyExtractor={(item) => item.key}
             />
-            <ClosePopup>X</ClosePopup>
+            <ClosePopup onPress={()=>setShowSelectRecipePopup(false)}>X</ClosePopup>
           </PopupView>
         </CenterPopup>
       </Popup>

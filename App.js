@@ -325,7 +325,7 @@ const TemplateRecipes = [{
 
 export default function App() {
   let [Recipes,changeRecipes] = useState(TemplateRecipes)
-  let [currentView,changeCurrentView] = useState(Views.MealOutput)
+  let [currentView,changeCurrentView] = useState(Views.Home)
   let [selectedRecipe,setSelectedRecipe] = useState(0)
   let [mealTime,setMealTime] = useState(5)
   let [mealPeriod, setMealPeriod] = useState(1)

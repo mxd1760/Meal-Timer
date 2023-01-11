@@ -71,7 +71,6 @@ export const CenterPopup = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-bottom: ${(props) => props.theme.sizes[4]};
 `;
 export const PopupView = styled.View`
   width: 90%; 
@@ -79,6 +78,7 @@ export const PopupView = styled.View`
   align-items: center;
   border-radius: ${(props) => props.theme.space[2]};
   background-color: ${(props) => props.theme.colors.brand.secondary};
+  margin: ${props=>props.theme.sizes[2]};
 `;
 export const PopupTitle = styled.Text`
   padding:${(props) => props.theme.space[3]}
@@ -108,6 +108,14 @@ export const TextEntry = styled.TextInput`
   background-color: ${(props) => props.theme.colors.ui.tertiary}
   padding: ${(props) => props.theme.space[2]}
 `;
+export const TextAreaEntry = styled.TextInput`
+  flex:1;
+  text-align-vertical:top;
+  margin: ${props=>props.theme.sizes[1]};
+  font-size: ${props=>props.theme.fontSizes.title};
+  background-color:${props=>props.theme.colors.ui.tertiary};
+  border: ${(props) => props.theme.colors.ui.secondary} ${(props) => props.theme.borderSize[2]};
+`;
 export const SmallButton = styled.Text`
   width: 40%;
   text-align: center;
@@ -133,6 +141,7 @@ export const MyCaption = styled.Text`
   padding-bottom: ${(props) => props.theme.space[2]};
 `;
 export const InfoView = styled.View`
+  flex:1;
   width: 100%;
   padding-horizontal: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
@@ -141,7 +150,7 @@ export const NumberEntry = styled.TextInput`
   width:50%;
   border: ${(props) => props.theme.colors.ui.secondary} ${(props) =>
   props.theme.borderSize[2]};
-  font-size: ${(props) => props.theme.fontSizes.h4};
+  font-size: ${(props) => props.theme.fontSizes.h5};
   background-color: ${(props) => props.theme.colors.ui.tertiary}
   padding: ${(props) => props.theme.space[2]}
 `;
@@ -191,3 +200,4 @@ export const RTIImpact = styled.Text`
   color: ${(props) => props.theme.colors.ui.primary};
   font-size: ${(props) => props.theme.fontSizes.title};
 `
+
