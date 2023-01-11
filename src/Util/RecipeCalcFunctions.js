@@ -29,6 +29,15 @@ export function channelAvailable(stepChannel,occupiedChannels,channelSettings){
   return out;
 }
 
+export function formatDelay(t_minus){
+  let hours = 0;
+  while(t_minus>=60){
+    t_minus -= 60;
+    hours += 1;
+  }
+  return `${hours}:${t_minus}`
+}
+
 export function formatTime(t_minus,time,period){
   while(t_minus>=60){
     t_minus -= 60;

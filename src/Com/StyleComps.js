@@ -42,6 +42,7 @@ export const ListItem = styled.Text`
   font-size: ${(props) => props.theme.fontSizes.h4};
   margin-bottom: ${(props) => props.theme.space[2]};
 `;
+
 export const ListItemView = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -101,7 +102,6 @@ export const ClosePopup = styled.Text`
 `;
 export const TextEntry = styled.TextInput`
   width:80%;
-  flex-grow:1;
   border: ${(props) => props.theme.colors.ui.secondary} ${(props) =>
   props.theme.borderSize[2]};
   font-size: ${(props) => props.theme.fontSizes.h4};
@@ -204,3 +204,18 @@ export const RTITimeStamp = styled.Text`
   color: ${(props) => props.theme.colors.ui.primary};
   font-size: ${(props) => props.theme.fontSizes.title};
 `;
+export const RLText = styled.Text`
+  flex:1;
+  font-size: ${(props) => props.theme.fontSizes.h4};
+  padding: ${props=>props.theme.sizes[0]}
+`;
+export const RLText2 = styled.Text`
+  font-size: ${(props) => props.theme.fontSizes.h4};
+  padding:${props=>props.theme.sizes[0]}
+`;
+export const RLWrapper = styled.View`
+  width:100%;
+  flex:1;
+  align-items:center;
+`
+export const RLPressable = styled.TouchableWithoutFeedback``;
