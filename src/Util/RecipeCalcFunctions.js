@@ -9,12 +9,12 @@ export function getTotalTime(recipe){
 }
 
 export function channelAvailable(stepChannel,occupiedChannels,channelSettings){
-  console.log(stepChannel)
-  console.log("Occupied Channels: length->"+ occupiedChannels.length)
-  for(let elem of occupiedChannels){
-    console.log(elem)
-  }
-  console.log(channelSettings)
+  //console.log(stepChannel)
+  //console.log("Occupied Channels: length->"+ occupiedChannels.length)
+  //for(let elem of occupiedChannels){
+  //  console.log(elem)
+  //}
+  //console.log(channelSettings)
   let usedChannelsTally = {}
   for(let name in channelSettings){
     usedChannelsTally[name] = 0;
@@ -22,9 +22,9 @@ export function channelAvailable(stepChannel,occupiedChannels,channelSettings){
   for(let elem of occupiedChannels){
     usedChannelsTally[elem.channel] += 1;
   }
-  console.log(usedChannelsTally)
+  //console.log(usedChannelsTally)
   let out = usedChannelsTally[stepChannel.name] < channelSettings[stepChannel.name]
-  console.log(out)
+  //console.log(out)
   return out;
 }
 
