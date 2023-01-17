@@ -16,8 +16,14 @@ import {
   ClosePopup,
   TextEntry,
   SmallButton,
+  RLText,
+  RLText2,
+  ListItemView,
+  RLWrapper,
+  RLPressable,
 } from "../Com/StyleComps";
 import { formatTitle } from "../Util/HelperFunctions";
+import { formatDelay } from "../Util/RecipeCalcFunctions";
 
 export default function ({ back, recipes = [], addRecipe, goToRecipe }) {
   let [showNewRecipePopup, setShowNewRecipePopup] = useState(false);
@@ -37,10 +43,19 @@ export default function ({ back, recipes = [], addRecipe, goToRecipe }) {
         <MyList
           data={recipes}
           renderItem={({ item, index }) => {
+            let totalTime = 0;
+            if(item.tasks){
+              item.tasks.forEach(element => {
+                totalTime+=element.time;
+              });
+            }
             return (
-              <ListItem onPress={() => goToRecipe(index)}>
-                {item.title}: {item.tasks ? item.tasks.length : 0}
-              </ListItem>
+              <RLPressable onPress={() => goToRecipe(index)}>
+                <ListItemView>
+                  <RLText>{item.title}:</RLText>
+                  <RLText2>{formatDelay(totalTime)}</RLText2>
+                </ListItemView>
+              </RLPressable>
             );
           }}
           keyExtractor={(element) => {
@@ -67,13 +82,15 @@ export default function ({ back, recipes = [], addRecipe, goToRecipe }) {
       >
         <CenterPopup>
           <PopupView>
-            <PopupTitle>New Recipe</PopupTitle>
-            <TextEntry
-              onChangeText={onChangeNewRecipeTitle}
-              value={newRecipeTitle}
-              placeholder="Recipe Title"
-              onSubmitEditing={popupButtonHandler}
-            />
+            <RLWrapper>
+              <PopupTitle>New Recipe</PopupTitle>
+              <TextEntry
+                onChangeText={onChangeNewRecipeTitle}
+                value={newRecipeTitle}
+                placeholder="Recipe Title"
+                onSubmitEditing={popupButtonHandler}
+              />
+            </RLWrapper>
             <SmallButton onPress={popupButtonHandler}>Add</SmallButton>
             <ClosePopup onPress={() => setShowNewRecipePopup(false)}>
               X

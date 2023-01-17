@@ -24,8 +24,11 @@ import { times, periods } from "../Util/Times";
 export default function ({ back, recipes, submitMealForm }) {
   const [showSelectRecipePopup, setShowSelectRecipePopup] = useState(false);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
-  const [selectedTimePeriod, setSelectedTimePeriod] = useState(0);
-  const [selectedTime, setSelectedTime] = useState(0);
+  const [selectedTimePeriod, setSelectedTimePeriod] = useState(1);
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  const [recipeListIsValid,setRecipeListIsValid] = useState(true)
+  const [timeIsValid,setTimeIsValid] = useState(true)
 
   const addSelectedRecipe = (idx) => {
     if (selectedRecipes.indexOf(idx) == -1) {
@@ -34,6 +37,18 @@ export default function ({ back, recipes, submitMealForm }) {
   };
 
   const submit = (e) => {
+    let exitEarly = false;
+    if(selectedTime==null){
+      setTimeIsValid(false)
+      exitEarly=true;
+    }
+    if(selectedRecipes.length<1){
+      setRecipeListIsValid(false)
+      exitEarly=true
+    }
+    if(exitEarly){
+      return;
+    }
     submitMealForm(selectedTime, selectedTimePeriod, selectedRecipes.map((idx)=>recipes[idx]));
   };
 
@@ -42,6 +57,7 @@ export default function ({ back, recipes, submitMealForm }) {
   ));
   const handleNewRecipe = (e) => {
     setShowSelectRecipePopup(true);
+    setRecipeListIsValid(true)
   };
   return (
     <>
@@ -53,9 +69,12 @@ export default function ({ back, recipes, submitMealForm }) {
             <Selector
               data={times}
               defaultButtonText="time"
-              buttonStyle={{ width: 160 }}
+              buttonStyle={{ width: 160,backgroundColor:timeIsValid?
+                theme.colors.ui.tertiary:
+                theme.colors.ui.error}}
               onSelect={(item, i) => {
                 setSelectedTime(i);
+                setTimeIsValid(true);
               }}
               buttonTextAfterSelection={(item) => {
                 return item;
@@ -67,10 +86,13 @@ export default function ({ back, recipes, submitMealForm }) {
           </Group>
           <Selector
             data={periods}
-            buttonStyle={{ width: 80 }}
+            buttonStyle={{ width: 80,backgroundColor:timeIsValid?
+              theme.colors.ui.tertiary:
+              theme.colors.ui.error}}
             defaultButtonText={periods[selectedTimePeriod]}
             onSelect={(item, i) => {
               setSelectedTimePeriod(i);
+              setTimeIsValid(true)
             }}
             buttonTextAfterSelection={(item) => {
               return item;
@@ -81,6 +103,7 @@ export default function ({ back, recipes, submitMealForm }) {
           />
         </Group>
         <CollapsedList
+          style={recipeListIsValid||{backgroundColor:theme.colors.ui.error}}
           title="Recipes for this meal"
           left={(props) => <ClosePopup />}
         >
@@ -130,7 +153,7 @@ export default function ({ back, recipes, submitMealForm }) {
               )}
               keyExtractor={(item) => item.key}
             />
-            <ClosePopup>X</ClosePopup>
+            <ClosePopup onPress={()=>setShowSelectRecipePopup(false)}>X</ClosePopup>
           </PopupView>
         </CenterPopup>
       </Popup>

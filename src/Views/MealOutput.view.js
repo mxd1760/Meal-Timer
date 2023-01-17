@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import RecipeTaskItem from "../Com/RecipeTaskItem"
 import {Content, Back, SmallTitle, MyList,Footer} from "../Com/StyleComps"
-import {calculateRecipeStepOrder} from "../Util/RecipeCalcFunctions"
+import {calculateRecipeStepOrder,formatTime} from "../Util/RecipeCalcFunctions"
 import { defaultChannelSettings } from "../Enums/Channel.enum"
 
 
@@ -22,7 +22,9 @@ export default function({back,time,period,recipes,channelSettings=defaultChannel
         <SmallTitle>{"<Timer Here>"}</SmallTitle>
         <MyList
           data={orderedSteps}
-          renderItem={({item})=><RecipeTaskItem step={item.step}  startTime={item.startTime} endTime={item.endTime}/>}
+          renderItem={({item})=><RecipeTaskItem step={item.step}  
+          startTime={formatTime(item.startTime,time,period)} 
+          endTime={formatTime(item.endTime,time,period)}/>}
           keyExtractor={(item)=>item.step.key}
         />
       </Content>
