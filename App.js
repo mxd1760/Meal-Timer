@@ -288,31 +288,31 @@ const TemplateRecipes = [{
         time:10,
       },{
         key:uuid(),
-        ordinaId:2,
+        ordinalId:2,
         instructions:"chop lettuce",
         channel:Channel.Prep,
         time:2,
       },{
         key:uuid(),
-        ordinaId:3,
+        ordinalId:3,
         instructions:"chop tomatos",
         channel:Channel.Prep,
         time:2,
       },{
         key:uuid(),
-        ordinaId:4,
+        ordinalId:4,
         instructions:"chop onion",
         channel:Channel.Prep,
         time:2,
       },{
         key:uuid(),
-        ordinaId:5,
+        ordinalId:5,
         instructions:"prepare shreded cheese",
         channel:Channel.Prep,
         time:2,
       },{
         key:uuid(),
-        ordinaId:6,
+        ordinalId:6,
         instructions:"warm tortillas/shells",
         channel:Channel.Prep,
         time:5,
@@ -368,7 +368,10 @@ export default function App() {
     setMealTime(MealTime)
     setMealPeriod(MealPeriod)
     setMealRecipes(MealRecipes)
+  }
 
+  const toRecipesWithPopup=()=>{
+    changeCurrentView(Views.QuickNewRecipe)
   }
 
   let view = null
@@ -380,11 +383,20 @@ export default function App() {
         addRecipe={addRecipe}
         goToRecipe={goToRecipe}/>
       break;
+    case Views.QuickNewRecipe:
+      view = <RecipeListView 
+      back={toHome}
+      recipes={Recipes}
+      addRecipe={addRecipe}
+      goToRecipe={goToRecipe}
+      showNewRecipe/>
+      break;
     case Views.MealForm:
       view = <MealFormView
         back={toHome}
         recipes={Recipes}
-        submitMealForm={submitMealForm}/>
+        submitMealForm={submitMealForm}
+        divertToNewRecipe={toRecipesWithPopup}/>
       break;
     case Views.RecipeTasks:
       view = <RecipeTaskView 

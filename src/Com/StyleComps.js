@@ -188,6 +188,7 @@ export const RTIView2 = styled.View`
   justify-content: space-between;
 `;
 export const RTIButton = styled.Text`
+  text-align:center;
   font-size: ${(props) => props.theme.fontSizes.h4}
   background-color: ${(props) => props.theme.colors.brand.primary}
   border-radius: ${(props) => props.theme.sizes[1]};

@@ -4,6 +4,7 @@ export default class Views {
   static RecipeTasks = new Views("tasks")
   static MealForm = new Views("meal form")
   static MealOutput = new Views("meal output")
+  static QuickNewRecipe = new Views("quick new recipe")
 
 
   constructor(name){

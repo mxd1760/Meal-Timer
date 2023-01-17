@@ -15,7 +15,7 @@ export default function RecipeTaskItem({ step, startTime, endTime }) {
       <RTIView>
         <RTIHeader>
           {step.recipeTitle}
-          {"->"}Step: {step.ordinalId}
+          {" -> "}Step:{step.ordinalId}
         </RTIHeader>
         <MyCaption>
           {"\t"} - {step.instructions}

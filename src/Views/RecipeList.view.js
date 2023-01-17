@@ -25,8 +25,8 @@ import {
 import { formatTitle } from "../Util/HelperFunctions";
 import { formatDelay } from "../Util/RecipeCalcFunctions";
 
-export default function ({ back, recipes = [], addRecipe, goToRecipe }) {
-  let [showNewRecipePopup, setShowNewRecipePopup] = useState(false);
+export default function ({ back, recipes = [], addRecipe, goToRecipe,showNewRecipe=false}) {
+  let [showNewRecipePopup, setShowNewRecipePopup] = useState(showNewRecipe);
   let [newRecipeTitle, onChangeNewRecipeTitle] = useState("");
   const popupButtonHandler = (e) => {
     if (newRecipeTitle) {

@@ -55,6 +55,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
       return;
     }
     addTask({
+      recipeTitle: recipe.title,
       key: uuid(),
       ordinalId: recipe.tasks.length + 1,
       channel: newTaskChannel,

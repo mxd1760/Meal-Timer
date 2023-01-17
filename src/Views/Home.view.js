@@ -7,7 +7,7 @@ export default function ({ toRecipes, toMeals }) {
       <Title>Meal Timer</Title>
       <Links>
         <Link onPress={toRecipes}>Recipes</Link>
-        <Link onPress={toMeals}>Meals</Link>
+        <Link onPress={toMeals}>Prepare Meal</Link>
       </Links>
     </>
   );

@@ -19,7 +19,7 @@ export default function({back,time,period,recipes,channelSettings=defaultChannel
     <>
       <SmallTitle>Meal Output</SmallTitle>
       <Content>
-        <SmallTitle>{"<Timer Here>"}</SmallTitle>
+        {/* <SmallTitle>{"<Timer Here>"}</SmallTitle> */}
         <MyList
           data={orderedSteps}
           renderItem={({item})=><RecipeTaskItem step={item.step}  

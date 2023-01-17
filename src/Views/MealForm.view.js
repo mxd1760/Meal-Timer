@@ -17,11 +17,12 @@ import {
   PopupView,
   MyList,
   ListItem,
+  SmallButton,
 } from "../Com/StyleComps";
 import { theme } from "../Inf/themes";
 import { times, periods } from "../Util/Times";
 
-export default function ({ back, recipes, submitMealForm }) {
+export default function ({ back, recipes, submitMealForm,divertToNewRecipe }) {
   const [showSelectRecipePopup, setShowSelectRecipePopup] = useState(false);
   const [selectedRecipes, setSelectedRecipes] = useState([]);
   const [selectedTimePeriod, setSelectedTimePeriod] = useState(1);
@@ -61,7 +62,7 @@ export default function ({ back, recipes, submitMealForm }) {
   };
   return (
     <>
-      <SmallTitle>Plan Your Meal</SmallTitle>
+      <SmallTitle>Prepare Meal</SmallTitle>
       <Content>
       <Group>
           <Group>
@@ -153,6 +154,7 @@ export default function ({ back, recipes, submitMealForm }) {
               )}
               keyExtractor={(item) => item.key}
             />
+            <SmallButton onPress={divertToNewRecipe}>New Recipe</SmallButton>
             <ClosePopup onPress={()=>setShowSelectRecipePopup(false)}>X</ClosePopup>
           </PopupView>
         </CenterPopup>
