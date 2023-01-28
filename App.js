@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {StatusBar} from "react-native";
 import styled, { ThemeProvider } from "styled-components/native";
 import SafeAreaView, { SafeAreaProvider } from "react-native-safe-area-view";
@@ -9,17 +9,36 @@ import Channel from "./src/Enums/Channel.enum";
 import HomeView from "./src/Views/Home.view";
 import RecipeListView from "./src/Views/RecipeList.view";
 import MealFormView from "./src/Views/MealForm.view";
-import RecipeTaskView from "./src/Views/TaskList.view";
+import RecipeTaskView from "./src/Views/RecipeTask.view";
 import MealOutputView from "./src/Views/MealOutput.view";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
-  margin-top: ${StatusBar.currentHeight}px;
   background-color: ${(props) => props.theme.colors.ui.primary};
   align-items: stretch;
 `;
 
+const storeData = async (value)=>{
+  try{
+    const jsonValue = JSON.stringify(value)
+    await AsyncStorage.setItem("@Recipes",jsonValue)
+  }catch(e){
+    console.log("Store Error")
+    console.error(e)
+  }
+}
+
+const getData = async()=>{
+  try{
+    const jsonValue = await AsyncStorage.getItem("@Recipes")
+    return jsonValue != null? JSON.parse(jsonValue):TemplateRecipes;
+  } catch(e){
+    console.log("Get Error")
+    console.error(e)
+  }
+}
 
 const TemplateRecipes = [{
     title:"Cookies",
@@ -281,36 +300,42 @@ const TemplateRecipes = [{
     key:uuid(),
     tasks:[
       {
+        recipeTitle:"Tacos",
         key:uuid(),
         ordinalId:1,
         instructions:"brown the meat",
         channel:Channel.Prep,
         time:10,
       },{
+        recipeTitle:"Tacos",
         key:uuid(),
         ordinalId:2,
         instructions:"chop lettuce",
         channel:Channel.Prep,
         time:2,
       },{
+        recipeTitle:"Tacos",
         key:uuid(),
         ordinalId:3,
         instructions:"chop tomatos",
         channel:Channel.Prep,
         time:2,
       },{
+        recipeTitle:"Tacos",
         key:uuid(),
         ordinalId:4,
         instructions:"chop onion",
         channel:Channel.Prep,
         time:2,
       },{
+        recipeTitle:"Tacos",
         key:uuid(),
         ordinalId:5,
         instructions:"prepare shreded cheese",
         channel:Channel.Prep,
         time:2,
       },{
+        recipeTitle:"Tacos",
         key:uuid(),
         ordinalId:6,
         instructions:"warm tortillas/shells",
@@ -324,13 +349,24 @@ const TemplateRecipes = [{
 
 
 export default function App() {
-  let [Recipes,changeRecipes] = useState(TemplateRecipes)
+  let [Recipes,changeRecipes] = useState([])
   let [currentView,changeCurrentView] = useState(Views.Home)
   let [selectedRecipe,setSelectedRecipe] = useState(0)
   let [mealTime,setMealTime] = useState(5)
   let [mealPeriod, setMealPeriod] = useState(1)
   let [mealRecipes, setMealRecipes] = useState(Recipes)
+  let [placeholderTime,setPlaceholderTime] = useState(null)
+  let [placeholderPeriod,setPlaceholderPeriod] = useState(1)
+  let [placeholderRecipes,setPlaceholderRecipes]=useState([])
+
+  useEffect(()=>{
+    getData()
+      .then(res=>changeRecipes(res))
+      .catch(reason=>changeRecipes(TemplateRecipes))
+  },[])
   
+
+
   const addRecipe = (newRecipeTitle)=>{
     const newRecipe = {
       title:newRecipeTitle,
@@ -338,6 +374,7 @@ export default function App() {
       tasks:[]
     }
     changeRecipes([...Recipes,newRecipe])
+    storeData(Recipes)
   }
   const addTask = (newTask)=>{
     changeRecipes(Recipes.map((recipe,n)=>{
@@ -346,8 +383,14 @@ export default function App() {
       }
       return recipe
     }))
+    storeData(Recipes)
   }
-
+  const replaceTask = (newTask,stepIndex)=>{
+    let newRecipes = [...Recipes]
+    newRecipes[selectedRecipe].tasks[stepIndex]=newTask
+    changeRecipes(newRecipes)
+    storeData(Recipes)
+  }
   const toHome = (e)=>{
     changeCurrentView(Views.Home)
   }
@@ -355,23 +398,37 @@ export default function App() {
     changeCurrentView(Views.Recipes)
   }
   const toMealForm=(e)=>{
+    setPlaceholderPeriod(1)
+    setPlaceholderTime(null)
+    setPlaceholderRecipes([])
     changeCurrentView(Views.MealForm)
   }
-
   const goToRecipe=(recipeIndex)=>{
     setSelectedRecipe(recipeIndex);
     changeCurrentView(Views.RecipeTasks);
   }
-
   const submitMealForm=(MealTime,MealPeriod,MealRecipes)=>{
     changeCurrentView(Views.MealOutput);
     setMealTime(MealTime)
     setMealPeriod(MealPeriod)
     setMealRecipes(MealRecipes)
   }
-
-  const toRecipesWithPopup=()=>{
+  const toQuickNewRecipe=(time,period,recipes)=>{
+    setPlaceholderTime(time)
+    setPlaceholderPeriod(period)
+    setPlaceholderRecipes([...recipes,Recipes.length])
     changeCurrentView(Views.QuickNewRecipe)
+  }
+  const submitQuickNewRecipe = ()=>{
+    changeCurrentView(Views.MealForm)
+  }
+  const cancelQuickNewRecipe = ()=>{
+    setPlaceholderRecipes(placeholderRecipes.splice(-1,1))
+    changeCurrentView(Views.MealForm)
+  }
+  const goToQuickNewRecipeSteps = (recipeIndex)=>{
+    setSelectedRecipe(recipeIndex);
+    changeCurrentView(Views.QuickNewRecipeSteps)
   }
 
   let view = null
@@ -385,25 +442,37 @@ export default function App() {
       break;
     case Views.QuickNewRecipe:
       view = <RecipeListView 
-      back={toHome}
+      back={cancelQuickNewRecipe}
       recipes={Recipes}
       addRecipe={addRecipe}
-      goToRecipe={goToRecipe}
+      goToRecipe={goToQuickNewRecipeSteps}
       showNewRecipe/>
+      break;
+    case Views.QuickNewRecipeSteps:
+      view = <RecipeTaskView
+        back={submitQuickNewRecipe}
+        recipe={Recipes[selectedRecipe]}
+        addTask={addTask}
+        replaceTask={replaceTask}/>
+      break;
+    case Views.RecipeTasks:
+      view = <RecipeTaskView 
+        back={toRecipes}
+        recipe={Recipes[selectedRecipe]}
+        addTask={addTask}
+        replaceTask={replaceTask}/>
       break;
     case Views.MealForm:
       view = <MealFormView
         back={toHome}
         recipes={Recipes}
         submitMealForm={submitMealForm}
-        divertToNewRecipe={toRecipesWithPopup}/>
+        divertToNewRecipe={toQuickNewRecipe}
+        placeholderPeriod={placeholderPeriod}
+        placeholderTime={placeholderTime}
+        placeholderRecipes={placeholderRecipes}/>
       break;
-    case Views.RecipeTasks:
-      view = <RecipeTaskView 
-        back={toRecipes}
-        recipe={Recipes[selectedRecipe]}
-        addTask={addTask}/>
-      break;
+
     case Views.MealOutput:
       view = <MealOutputView
         back={toMealForm}

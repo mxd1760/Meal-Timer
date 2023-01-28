@@ -22,11 +22,11 @@ import {
 import { theme } from "../Inf/themes";
 import { times, periods } from "../Util/Times";
 
-export default function ({ back, recipes, submitMealForm,divertToNewRecipe }) {
+export default function ({ back, recipes, submitMealForm,divertToNewRecipe,placeholderPeriod,placeholderTime,placeholderRecipes }) {
   const [showSelectRecipePopup, setShowSelectRecipePopup] = useState(false);
-  const [selectedRecipes, setSelectedRecipes] = useState([]);
-  const [selectedTimePeriod, setSelectedTimePeriod] = useState(1);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedRecipes, setSelectedRecipes] = useState(placeholderRecipes);
+  const [selectedTimePeriod, setSelectedTimePeriod] = useState(placeholderPeriod);
+  const [selectedTime, setSelectedTime] = useState(placeholderTime);
 
   const [recipeListIsValid,setRecipeListIsValid] = useState(true)
   const [timeIsValid,setTimeIsValid] = useState(true)
@@ -154,7 +154,7 @@ export default function ({ back, recipes, submitMealForm,divertToNewRecipe }) {
               )}
               keyExtractor={(item) => item.key}
             />
-            <SmallButton onPress={divertToNewRecipe}>New Recipe</SmallButton>
+            <SmallButton onPress={()=>divertToNewRecipe(selectedTime,selectedTimePeriod,selectedRecipes)}>New Recipe</SmallButton>
             <ClosePopup onPress={()=>setShowSelectRecipePopup(false)}>X</ClosePopup>
           </PopupView>
         </CenterPopup>

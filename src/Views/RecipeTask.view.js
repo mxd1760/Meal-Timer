@@ -29,31 +29,44 @@ import { formatTime } from "../Util/HelperFunctions";
 import { theme } from "../Inf/themes";
 
 
-export default function ({ back, recipe = {}, addTask = () => {} }) {
+export default function ({ back, 
+    recipe = {}, 
+    addTask = () => {} , 
+    replaceTask = () => {} }) {
   let [selectedTask, setSelectedTask] = useState(0);
   let [showTaskInfoPopup, setShowTaskInfoPopup] = useState(false);
   let [showNewTaskPopup, setShowNewTaskPopup] = useState(false);
   let [newTaskChannel, changeChannel] = useState(Channel.Prep);
-  let [newTaskTime, changeNewTaskTime] = useState(0);
+  let [newTaskTime, changeNewTaskTime] = useState(null);
   let [newTaskInstructions, changeInstructions] = useState("");
   let [showAddAnotherTaskPopup,setShowAddAnotherTaskPopup] = useState(false)
   let [instructionsAreValid,setInstructionsAreValid] = useState(true)
   let [timeIsValid,setTimeIsValid] = useState(true)
+  let [editing,setEditing] = useState(false)
 
+  // console.log(replaceTask)
+  // console.log(addTask)
 
-  const newTaskButtonHandler = (e) => {
-    let earlyExit = false;
+  const resetForm = ()=>{
+    changeChannel(Channel.Prep);
+    changeNewTaskTime(0);
+    changeInstructions("");
+    setShowNewTaskPopup(false);
+  }
+  const validateForm= ()=>{
+    let valid = true;
     if (!newTaskTime||!Number.isInteger(newTaskTime)) {
       setTimeIsValid(false)
-      earlyExit= true;
+      valid=false
     }
     if(!newTaskInstructions){
       setInstructionsAreValid(false)
-      earlyExit=true;
+      valid=false;
     }
-    if(earlyExit){
-      return;
-    }
+    return valid
+  }
+  const newTaskButtonHandler = (e) => {
+    if(!validateForm()) return;
     addTask({
       recipeTitle: recipe.title,
       key: uuid(),
@@ -62,15 +75,12 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
       instructions: newTaskInstructions,
       time: newTaskTime,
     });
-    changeChannel(Channel.Prep);
-    changeNewTaskTime(0);
-    changeInstructions("");
-    setShowNewTaskPopup(false);
+    resetForm()
     setShowAddAnotherTaskPopup(true);
   };
   const softSubmit = (e) => {
     if (newTaskTime && newTaskInstructions) {
-      newTaskButtonHandler(e);
+      editing?saveChanges(e):newTaskButtonHandler(e);
     }
   };
   const timeInputHandler = (newTime)=>{
@@ -87,6 +97,28 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
   const SAATP_yes = (e)=>{
     setShowAddAnotherTaskPopup(false)
     setShowNewTaskPopup(true)
+  }
+  const changeInfoToEdit = (e)=>{
+    setEditing(true)
+    let editTask = recipe.tasks[selectedTask]
+    changeChannel(editTask.channel)
+    changeInstructions(editTask.instructions)
+    changeNewTaskTime(editTask.time)
+    setShowTaskInfoPopup(false)
+    setShowNewTaskPopup(true)
+  }
+  const saveChanges = (e)=>{
+    if(!validateForm()) return;
+    replaceTask({
+      recipeTitle: recipe.title,
+      key: recipe.tasks[selectedTask].key,
+      ordinalId: recipe.tasks[selectedTask].ordinalId,
+      channel: newTaskChannel,
+      instructions: newTaskInstructions,
+      time: newTaskTime,
+    },selectedTask)
+    resetForm()
+    setEditing(false)
   }
 
   return (
@@ -127,13 +159,13 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
       >
         <CenterPopup>
           <PopupView>
-            <PopupTitle>Step: {recipe.tasks.length + 1}</PopupTitle>
+            <PopupTitle>Step: {editing?recipe.tasks[selectedTask].ordinalId:recipe.tasks.length + 1}</PopupTitle>
             <InfoView>
               <PopupSpan>
               <PopupText>Channel: </PopupText>
                 <Selector
                   data={Object.keys(Channel)}
-                  defaultValueByIndex={0}
+                  defaultValue={newTaskChannel.name}
                   onSelect={(item)=>{changeChannel(Channel[item])}}
                   buttonTextAfterSelection={(item) => {
                     return item;
@@ -147,7 +179,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
                 <NumberEntry
                   style={timeIsValid||{backgroundColor:theme.colors.ui.error}}
                   onChangeText={timeInputHandler}
-                  value={newTaskTime}
+                  value={newTaskTime&&newTaskTime.toString()}
                   keyboardType="numeric"
                   onSubmitEditing={softSubmit}
                 />
@@ -162,7 +194,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
                 multiline
               />
             </InfoView>
-            <SmallButton onPress={newTaskButtonHandler}>Add</SmallButton>
+            <SmallButton onPress={editing?saveChanges:newTaskButtonHandler}>{editing?"Save":"Add"}</SmallButton>
             <ClosePopup onPress={() => setShowNewTaskPopup(false)}>
               X
             </ClosePopup>
@@ -196,6 +228,7 @@ export default function ({ back, recipe = {}, addTask = () => {} }) {
                   -- {recipe.tasks[selectedTask].instructions}
                 </MyCaption>
               </InfoView>
+              <SmallButton onPress={changeInfoToEdit}>Edit</SmallButton>
               <ClosePopup onPress={() => setShowTaskInfoPopup(false)}>
                 X
               </ClosePopup>

@@ -35,7 +35,11 @@ export function formatDelay(t_minus){
     t_minus -= 60;
     hours += 1;
   }
-  return `${hours}:${t_minus}`
+  if(t_minus<10){
+    return `${hours}:0${t_minus}`
+  }else{
+    return `${hours}:${t_minus}`
+  }
 }
 
 export function formatTime(t_minus,time,period){
