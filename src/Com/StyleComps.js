@@ -46,7 +46,7 @@ export const ListItem = styled.Text`
 export const ListItemView = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.colors.ui.tertiary};
+  background-color: ${(props) => props.done?props.theme.colors.ui.secondary:props.theme.colors.ui.tertiary};
   margin-bottom: ${(props) => props.theme.space[2]};
 `;
 export const Footer = styled.View`

@@ -70,42 +70,42 @@ export function formatTime(t_minus,time,period){
     done:false
   }
 */
-export function calculateRecipeStepOrder1(recipes){
-  let out = [];
+// export function calculateRecipeStepOrder1(recipes){
+//   let out = [];
 
-  for(let r of recipes){
-    if(r.tasks){
-      let timeTotal = 0;
-      let prevKey = null;
-      for(let i = r.tasks.length-1; i>=0; i--){
-        let newTimeTotal = timeTotal + r.tasks[i].time
-        let newKey = uuid()
-        if(prevKey){
-          for(let x of out){
-            if(x.key==prevKey){
-              x.dependants.push(newKey)
-              break;
-            }
-          }
-        }
-        out.push({
-          key:newKey,
-          step: r.tasks[i],
-          endTime:timeTotal,
-          startTime:newTimeTotal,
-          done:false,
-          dependants:[]
-        })
-        timeTotal = newTimeTotal
-      }
-    }
-  }
-  out.sort((a,b)=>b.startTime-a.startTime);
-  return out;
-}
+//   for(let r of recipes){
+//     if(r.tasks){
+//       let timeTotal = 0;
+//       let prevKey = null;
+//       for(let i = r.tasks.length-1; i>=0; i--){
+//         let newTimeTotal = timeTotal + r.tasks[i].time
+//         let newKey = uuid()
+//         if(prevKey){
+//           for(let x of out){
+//             if(x.key==prevKey){
+//               x.dependants.push(newKey)
+//               break;
+//             }
+//           }
+//         }
+//         out.push({
+//           key:newKey,
+//           step: r.tasks[i],
+//           endTime:timeTotal,
+//           startTime:newTimeTotal,
+//           done:false,
+//           dependants:[]
+//         })
+//         timeTotal = newTimeTotal
+//       }
+//     }
+//   }
+//   out.sort((a,b)=>b.startTime-a.startTime);
+//   return out;
+// }
 
 export function calculateRecipeStepOrder(recipes,channelSettings){
-  console.log("calculating recipe")
+  // console.log("calculating recipe")
   let out = [];
   let huristics = [];
   for(let i=0;i<recipes.length;i++){

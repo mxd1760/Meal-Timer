@@ -54,7 +54,7 @@ export default function ({ back, recipes, submitMealForm,divertToNewRecipe,place
   };
 
   const selectedRecipeComponents = selectedRecipes.map((recipeIndex) => (
-    <CollapsedListItem title={recipes[recipeIndex].title} />
+    <CollapsedListItem key={recipes[recipeIndex].key} title={recipes[recipeIndex].title} />
   ));
   const handleNewRecipe = (e) => {
     setShowSelectRecipePopup(true);

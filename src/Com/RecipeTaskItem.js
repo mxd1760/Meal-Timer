@@ -9,9 +9,12 @@ import {
   RTITimeStamp,
 } from "./StyleComps";
 
-export default function RecipeTaskItem({ step, startTime, endTime }) {
+export default function RecipeTaskItem({ step, startTime, endTime,done,setDone }) {
+  const doneButtonHandler = (e)=>{
+    setDone(step)
+  }
   return (
-    <ListItemView>
+    <ListItemView done={done}>
       <RTIView>
         <RTIHeader>
           {step.recipeTitle}
@@ -26,7 +29,7 @@ export default function RecipeTaskItem({ step, startTime, endTime }) {
           <RTITimeStamp> Start: {startTime}</RTITimeStamp>
           <RTITimeStamp> End: {endTime}</RTITimeStamp>
         </RTIView2>
-        <RTIButton> Done </RTIButton>
+        <RTIButton onPress={doneButtonHandler}> Done </RTIButton>
       </RTIView2>
     </ListItemView>
   );
