@@ -9,7 +9,7 @@ import Channel from "./src/Enums/Channel.enum";
 import HomeView from "./src/Views/Home.view";
 import RecipeListView from "./src/Views/RecipeList.view";
 import MealFormView from "./src/Views/MealForm.view";
-import RecipeTaskView from "./src/Views/RecipeTask.view";
+import RecipeTasksView from "./src/Views/RecipeTasks.view";
 import MealOutputView from "./src/Views/MealOutput.view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -449,14 +449,14 @@ export default function App() {
       showNewRecipe/>
       break;
     case Views.QuickNewRecipeSteps:
-      view = <RecipeTaskView
+      view = <RecipeTasksView
         back={submitQuickNewRecipe}
         recipe={Recipes[selectedRecipe]}
         addTask={addTask}
         replaceTask={replaceTask}/>
       break;
     case Views.RecipeTasks:
-      view = <RecipeTaskView 
+      view = <RecipeTasksView 
         back={toRecipes}
         recipe={Recipes[selectedRecipe]}
         addTask={addTask}
