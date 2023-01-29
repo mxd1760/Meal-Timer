@@ -1,4 +1,4 @@
-import { List } from "react-native-paper";
+import { IconButton, List } from "react-native-paper";
 import SelectDropdown from "react-native-select-dropdown";
 import styled from "styled-components/native";
 
@@ -36,6 +36,9 @@ export const MyList = styled.FlatList.attrs({
   },
 })`
   flex: 1;
+  position:relative;
+  elevation:0;
+  z-index:0;
 `;
 export const ListItem = styled.Text`
   background-color: ${(props) => props.theme.colors.ui.tertiary};
@@ -46,10 +49,17 @@ export const ListItem = styled.Text`
 export const ListItemView = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  position:relative;
+  align-items:center;
+  z-index:0;
+  elevation:0;
   background-color: ${(props) => props.done?props.theme.colors.ui.secondary:props.theme.colors.ui.tertiary};
   margin-bottom: ${(props) => props.theme.space[2]};
 `;
 export const Footer = styled.View`
+  width:100%;
+  justify-content:space-between;
+  align-items:center;
   flex-direction: row;
   margin: ${(props) => props.theme.space[3]};
 `;
@@ -72,6 +82,12 @@ export const CenterPopup = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+`;
+export const CenterDarkenPopup = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color:rgba(0,0,0,0.8);
 `;
 export const PopupView = styled.View`
   width: 90%;
@@ -233,3 +249,24 @@ export const SmallPopupTitle = styled.Text`
   color: ${(props) => props.theme.colors.ui.primary};
   font-size: ${(props) => props.theme.fontSizes.h4};
 `;
+export const Space = styled.View`
+  flex:1;
+`
+export const MoveBubble = styled.View`
+  display:flex;
+  flex-direction:column;
+  position:absolute;
+  right:0;
+  z-index:10;
+  elevation:10;
+  border:${props=>props.theme.space[0]} ${props=>props.theme.colors.ui.primary};
+  border-radius: ${props=>props.theme.space[2]};
+  background-color: ${props=>props.theme.colors.ui.quaternary}
+`
+export const HeaderIconButton = styled(IconButton)`
+  margin-right:${props=>props.theme.sizes[2]}
+`
+export const StepInfoActionsSpan = styled.View`
+  flex-direction:row;
+  align-items:center;
+`

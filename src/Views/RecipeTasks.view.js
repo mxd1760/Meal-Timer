@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import {
   SmallTitle,
   MyList,
-  ListItem,
+  ListItemView,
   Footer,
   Back,
   Popup,
@@ -22,17 +22,27 @@ import {
   SmallButton,
   Selector,
   MiniPopupView,
-  SmallPopupTitle
+  SmallPopupTitle,
+  MoveBubble,
+  RLPressable,
+  RLText,
+  Space,
+  HeaderIconButton,
+  StepInfoActionsSpan,
+  CenterDarkenPopup
 } from "../Com/StyleComps";
 import Channel  from "../Enums/Channel.enum";
 import { formatTime } from "../Util/HelperFunctions";
 import { theme } from "../Inf/themes";
+import { IconButton } from "react-native-paper";
 
 
 export default function ({ back, 
     recipe = {}, 
-    addTask = () => {} , 
-    replaceTask = () => {} }) {
+    addTask = () => {console.error("provide an addTask function to recipeTasks")} , 
+    replaceTask = () => {console.error("provide a replaceTask function to recipeTasks")}, 
+    removeStep = ()=>{console.error("provide a removeStep function to recipeTasks")},
+    removeRecipe = ()=>{console.error("provide a removeRecipe function to recipeTasks")}}) {
   let [selectedTask, setSelectedTask] = useState(0);
   let [showTaskInfoPopup, setShowTaskInfoPopup] = useState(false);
   let [showNewTaskPopup, setShowNewTaskPopup] = useState(false);
@@ -43,6 +53,9 @@ export default function ({ back,
   let [instructionsAreValid,setInstructionsAreValid] = useState(true)
   let [timeIsValid,setTimeIsValid] = useState(true)
   let [editing,setEditing] = useState(false)
+  let [draggingIndex,setDraggingIndex] = useState(-1)
+  let [removingRecipe,setRemovingRecipe] = useState(false)
+  let [showConfirmDeletePopup,setShowConfirmDeletePopup] = useState(false)
 
   // console.log(replaceTask)
   // console.log(addTask)
@@ -120,23 +133,100 @@ export default function ({ back,
     resetForm()
     setEditing(false)
   }
+  const moveUp = (e)=>{
+    let swapper = {...recipe.tasks[draggingIndex]}
+    let swappee = {...recipe.tasks[draggingIndex-1]}
+    swapper.ordinalId=draggingIndex-1+1
+    swappee.ordinalId=draggingIndex+1
+    replaceTask(swapper,draggingIndex-1)
+    replaceTask(swappee,draggingIndex)
+    setDraggingIndex((id)=>id-1)
+  }
+  const moveDown = (e)=>{
+    let swapper = {...recipe.tasks[draggingIndex]}
+    let swappee = {...recipe.tasks[draggingIndex+1]}
+    swapper.ordinalId=draggingIndex+1+1
+    swappee.ordinalId=draggingIndex+1
+    replaceTask(swapper,draggingIndex+1)
+    replaceTask(swappee,draggingIndex)
+    setDraggingIndex((id)=>id+1)
+  }
+
+  const handleRemoveCancel=(e)=>{
+    setShowConfirmDeletePopup(false)
+  }
+  const handleRemoveConfirm = (e)=>{
+    setShowConfirmDeletePopup(false)
+    if(removingRecipe){
+      back()
+      removeRecipe()
+    }else{
+      setShowTaskInfoPopup(false)
+      removeStep(selectedTask)
+      setSelectedTask(0)
+    }
+  }
+
+  const handleRemoveRecipe = (e)=>{
+    setRemovingRecipe(true)
+    setShowConfirmDeletePopup(true)
+  }
+  const handleRemoveStep = (e)=>{
+    setRemovingRecipe(false)
+    setShowConfirmDeletePopup(true)
+  }
 
   return (
     <>
-      <SmallTitle>{recipe.title}</SmallTitle>
+      <Footer>
+        <SmallTitle>{recipe.title}</SmallTitle>
+        <HeaderIconButton
+          icon="delete"
+          size={50}
+          iconColor={theme.colors.brand.primary}
+          onPress={handleRemoveRecipe}/>
+      </Footer>
       <MyList
         data={recipe.tasks}
         renderItem={({ item, index }) => (
-          <ListItem
-            onPress={() => {
-              if (!showNewTaskPopup) {
+          <RLPressable onPress={
+            () => {
+              if (!showNewTaskPopup&&draggingIndex==-1) {
                 setSelectedTask(index);
                 setShowTaskInfoPopup(true);
-              }
-            }}
-          >
-            Step {item.ordinalId}: {formatTime(item.time)}
-          </ListItem>
+              }else{
+                setDraggingIndex(-1)
+              }}
+          }>
+          <ListItemView style={index==draggingIndex&&{backgroundColor:theme.colors.brand.primary}}>
+            <RLText>Step {item.ordinalId}: {formatTime(item.time)}</RLText>
+            <IconButton
+              icon="arrow-up-down"
+              disabled={draggingIndex!=-1}
+              onPress={(e)=>{
+                e.stopPropagation()
+                setDraggingIndex(index)
+              }}
+            />
+            {index==draggingIndex&&
+            <MoveBubble>
+              <RLPressable onPress={e=>{
+                e.stopPropagation()
+                console.log("stop??")}}>
+                <Space>
+                  <IconButton
+                    icon="arrow-up"
+                    disabled={draggingIndex==0}
+                    onPress={moveUp}/>
+                  <IconButton
+                    icon="arrow-down"
+                    disabled={draggingIndex==recipe.tasks.length-1}
+                    onPress={moveDown}/>
+                </Space>
+              </RLPressable>
+            </MoveBubble>}
+          </ListItemView>
+          </RLPressable>
         )}
         keyExtractor={(item) => item.key}
       />
@@ -228,7 +318,14 @@ export default function ({ back,
                   -- {recipe.tasks[selectedTask].instructions}
                 </MyCaption>
               </InfoView>
-              <SmallButton onPress={changeInfoToEdit}>Edit</SmallButton>
+              <StepInfoActionsSpan>
+                <IconButton
+                  icon="delete"
+                  onPress={handleRemoveStep}
+                  size={40}
+                  />
+                <SmallButton onPress={changeInfoToEdit}>Edit</SmallButton>
+              </StepInfoActionsSpan>
               <ClosePopup onPress={() => setShowTaskInfoPopup(false)}>
                 X
               </ClosePopup>
@@ -253,6 +350,22 @@ export default function ({ back,
             </PopupSpan>
           </MiniPopupView>
         </CenterPopup>
+      </Popup>
+      <Popup animationType = "fade"
+      transparent={true}
+      visible={showConfirmDeletePopup}
+      onRequestClose={()=>{
+        setShowConfirmDeletePopup(false)
+      }}>
+        <CenterDarkenPopup>
+          <MiniPopupView>
+            <SmallPopupTitle>Are you shure you would like to delete this?</SmallPopupTitle>
+            <PopupSpan>
+              <SmallButton onPress={handleRemoveCancel}>No</SmallButton>
+              <SmallButton onPress={handleRemoveConfirm}>Yes</SmallButton>
+            </PopupSpan>
+          </MiniPopupView>
+        </CenterDarkenPopup>
       </Popup>
     </>
   );

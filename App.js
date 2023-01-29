@@ -391,6 +391,24 @@ export default function App() {
     changeRecipes(newRecipes)
     storeData(Recipes)
   }
+  const removeRecipe = ()=>{
+    changeRecipes(Recipes.filter((_,i)=>i!=selectedRecipe))
+    setSelectedRecipe(0)
+    storeData(Recipes)
+  }
+  const removeStep = (stepIndex)=>{
+    changeRecipes(Recipes.map((recipe,i)=>{
+      if(i==selectedRecipe){
+        recipe.tasks = recipe.tasks.filter((_,i)=>i!=stepIndex)
+        recipe.tasks = recipe.tasks.map((task,i)=>{
+          task.ordinalId=i+1;
+          return task;
+        })
+      }
+      return recipe;
+    }))
+    storeData(Recipes)
+  }
   const toHome = (e)=>{
     changeCurrentView(Views.Home)
   }
@@ -431,6 +449,7 @@ export default function App() {
     changeCurrentView(Views.QuickNewRecipeSteps)
   }
 
+
   let view = null
   switch(currentView){
     case Views.Recipes:
@@ -453,14 +472,18 @@ export default function App() {
         back={submitQuickNewRecipe}
         recipe={Recipes[selectedRecipe]}
         addTask={addTask}
-        replaceTask={replaceTask}/>
+        replaceTask={replaceTask}
+        removeRecipe={removeRecipe}
+        removeStep={removeStep}/>
       break;
     case Views.RecipeTasks:
       view = <RecipeTasksView 
         back={toRecipes}
         recipe={Recipes[selectedRecipe]}
         addTask={addTask}
-        replaceTask={replaceTask}/>
+        replaceTask={replaceTask}
+        removeRecipe={removeRecipe}
+        removeStep={removeStep}/>
       break;
     case Views.MealForm:
       view = <MealFormView
