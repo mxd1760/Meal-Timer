@@ -58,7 +58,13 @@ export function formatTime(t_minus,time,period){
     if(time<0){
       time=11;
     }
-    return `${times[time]}:${60-t_minus} ${periods[period]}`
+    let mins = 60-t_minus
+    if(mins<10){
+      return `${times[time]}:0${mins} ${periods[period]}`
+    }else{
+      return `${times[time]}:${mins} ${periods[period]}`
+    }
+    
   }
 }
 
